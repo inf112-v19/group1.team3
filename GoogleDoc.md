@@ -1,4 +1,4 @@
-### Obligatorisk øvelse 2
+# Obligatorisk øvelse 2
 
 ## Del 1
 
