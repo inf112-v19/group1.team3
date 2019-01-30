@@ -1,4 +1,6 @@
+### Obligatorisk øvelse 2
 
+## Del 1
 
 ## Del 2 - Oversikt over forventet produkt
 
@@ -8,4 +10,6 @@ En liste over krav til systemet basert (på høynivåkravene gjennomgått i fore
 
 
 En prioritert liste over hvilke krav dere vil ha med i første iterasjon:
+
+## Del 3
 
