@@ -1,6 +1,11 @@
 # Obligatorisk øvelse 2
 
 ## Del 1
+Navn: Såpebobler 
+
+Vi har alle erfaring med Java fra tiligere fag, men noen er mer komertable med det enn andre. 
+Andrea har noe erfraing med Scrum og jobbing i sprints. 
+
 
 ## Del 2 - Oversikt over forventet produkt
 
