@@ -5,6 +5,8 @@ Navn: Såpebobler
 Teamleder: Håvard
 Kundekontakt: Andrea
 
+Gruppen planlegger å rullere på teamlead og kundekontakt slik at alle får prøvd seg i rollene.
+
 Vi har satt opp tavle på Trello og vil bruke git for kodene. Trello vil fungere som en oversikt over hva som skal gjøres, hva som er under produksjon og hva som er gjort ferdig. Har kan alle legge inn kommentarer, spørsmål og flere gjøremål. Vi vil bruke gruppetimene effektivt sammen, samt. fredager hvis vi trenger mere tid og må jobbe sammen. 
 
 
