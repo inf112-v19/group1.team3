@@ -5,7 +5,7 @@
 
 Navn: Såpebobler 
 
-Vi har alle erfaring med Java fra tiligere fag, men noen er mer komertable med det enn andre. 
+Vi har alle erfaring med Java fra tidligere fag, men noen er mer komfortable med det enn andre. Eirik har lagd brett før. 
 Andrea har noe erfraing med Scrum og jobbing i sprints. 
 
 
