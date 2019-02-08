@@ -6,7 +6,7 @@ Gruppenavn: Såpebobler
 Teamleder: Håvard
 Kundekontakt: Andrea
 
-Gruppenavnet kom etter en diskusjon teamet hadde om hva vi ønsket å legge til av funksjoner i spillet. Navnet viser at vi har ambisjoner om å gjøre noe kreativt med spillet, og at vi går inn med en innstilling om å ha det gøy med prosjektet. Vi bestemte oss tidlig for å at vi ønsker å rullere på rollene som teamleder og kundekontakt slik at alle får prøvd seg.
+Gruppenavnet kom etter en diskusjon teamet hadde om hva vi ønsket å legge til av funksjoner i spillet. Navnet viser at vi har ambisjoner om å gjøre noe kreativt med spillet, og at vi går inn med en innstilling om å ha det gøy med prosjektet. Vi bestemte oss tidlig for at vi ønsker å rullere på rollene som teamleder og kundekontakt slik at alle får prøvd seg.
 
 Vi har satt opp tavle på Trello og vil bruke git for kode. Trello vil fungere som en oversikt over hva som skal gjøres, hva som er under produksjon og hva som er gjort ferdig. Har kan alle legge inn kommentarer, spørsmål og flere gjøremål. Vi vil bruke gruppetimene effektivt, og vil sette av tid på fredager dersom vi har behov for mer tid sammen.
 
