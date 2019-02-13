@@ -23,6 +23,23 @@ Spillebrett, flag, vegger, bevegelsesfelt, speialrute, laser
 Brikke, enkle programkort, spiller
 Runde, fase 
 
+Vise et brett som inneholder ulike vanlige ruter og spesial ruter. Dette brettet kan være i ulike størrelser
+
+Vise en brikke som er objektet som spilleren flytter rundt på brettet. 
+
+Dele ut ni programkort som har ulike bevegelser som roter høyre, roter venstre, bevege seg tre ruter osv. 
+
+Ha ulike spesialruter som gjør ulike ting på brettet
+•	Transportbånd - som vil flytte på spilleren en eller flere ruter og muligens rotere dem
+•	Hull - som gjør at brikken faller av brettet og blir ødelagt, 
+•	Flagg- som er et sjekkpunkt som alle spillerne må innom. Når en spiller har gått innom flaggene i en bestemt rekkefølge vinner man spillet
+•	Vegger - som blokkerer spiller akkurat som en fysisk vegg ville gjort
+•	Skiftenøkkel rute som reparer spilleren
+•	Roterings rute som rotere spiller 90 grader til høyre eller venstre
+•	Lasere som skyter ut en laser over en eller flere brikker. Vist en spiller treffer en laser vil den bli skadet.
+
+Ha evig antall runder som består av fem faser, spillet vil avslutte når en spiller har vært innom alle de forskjellige flaggene. I en fase skal et spillekort fra hver spiller bli spilt. I hver fase etter alle spillerne sine kort har blitt spilt skal brettet aktiveres. Her vil brettet aktivere transportasjonsbåndet og laserne vil aktiveres. Spillerens laser vil også bli aktivert etter hver fase.
+
 
 En prioritert liste over hvilke krav dere vil ha med i første iterasjon:
 I denne første obligen har vi laget:
