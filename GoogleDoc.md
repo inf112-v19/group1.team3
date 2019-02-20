@@ -1,15 +1,16 @@
 # Obligatorisk øvelse 2
 
 ## Del 1
+
+
 Navn: Såpebobler 
 Teamleder: Håvard
 Kundekontakt: Andrea
 
-Gruppen planlegger å rullere på teamlead og kundekontakt slik at alle får prøvd seg i rollene.
-
 Vi har satt opp tavle på Trello og vil bruke git for kodene. Trello vil fungere som en oversikt over hva som skal gjøres, hva som er under produksjon og hva som er gjort ferdig. Har kan alle legge inn kommentarer, spørsmål og flere gjøremål. Vi vil bruke gruppetimene effektivt sammen, samt. fredager hvis vi trenger mere tid og må jobbe sammen. 
 
-Vi har alle erfaring med Java fra tiligere fag, men noen er mer komertable med det enn andre. Erik har erfaring med å lage brett og har derfor laget første del av koden til denne leveransen. 
+
+Vi har alle erfaring med Java fra tidligere fag, men noen er mer komfortable med det enn andre. Eirik har lagd brett før. 
 Andrea har noe erfraing med Scrum og jobbing i sprints. 
 
 
@@ -21,10 +22,14 @@ En liste over krav til systemet basert (på høynivåkravene gjennomgått i fore
 Spillebrett, flag, vegger, bevegelsesfelt, speialrute, laser
 Brikke, enkle programkort, spiller
 Runde, fase 
-- Vise et brett som inneholder ulike vanlige ruter og spesial ruter. Dette brettet kan være i ulike størrelser
-- Vise en brikke som er objektet som spilleren flytter rundt på brettet. 
-- Dele ut ni programkort som har ulike bevegelser som roter høyre, roter venstre, bevege seg tre ruter osv. 
-- Ha ulike spesialruter som gjør ulike ting på brettet
+
+Vise et brett som inneholder ulike vanlige ruter og spesial ruter. Dette brettet kan være i ulike størrelser
+
+Vise en brikke som er objektet som spilleren flytter rundt på brettet. 
+
+Dele ut ni programkort som har ulike bevegelser som roter høyre, roter venstre, bevege seg tre ruter osv. 
+
+Ha ulike spesialruter som gjør ulike ting på brettet
 •	Transportbånd - som vil flytte på spilleren en eller flere ruter og muligens rotere dem
 •	Hull - som gjør at brikken faller av brettet og blir ødelagt, 
 •	Flagg- som er et sjekkpunkt som alle spillerne må innom. Når en spiller har gått innom flaggene i en bestemt rekkefølge vinner man spillet
@@ -32,8 +37,8 @@ Runde, fase
 •	Skiftenøkkel rute som reparer spilleren
 •	Roterings rute som rotere spiller 90 grader til høyre eller venstre
 •	Lasere som skyter ut en laser over en eller flere brikker. Vist en spiller treffer en laser vil den bli skadet.
-- Ha evig antall runder som består av fem faser, spillet vil avslutte når en spiller har vært innom alle de forskjellige flaggene. I en fase skal et spillekort fra hver spiller bli spilt. I hver fase etter alle spillerne sine kort har blitt spilt skal brettet aktiveres. Her vil brettet aktivere transportasjonsbåndet og laserne vil aktiveres. Spillerens laser vil også bli aktivert etter hver fase.
 
+Ha evig antall runder som består av fem faser, spillet vil avslutte når en spiller har vært innom alle de forskjellige flaggene. I en fase skal et spillekort fra hver spiller bli spilt. I hver fase etter alle spillerne sine kort har blitt spilt skal brettet aktiveres. Her vil brettet aktivere transportasjonsbåndet og laserne vil aktiveres. Spillerens laser vil også bli aktivert etter hver fase.
 
 
 En prioritert liste over hvilke krav dere vil ha med i første iterasjon:
