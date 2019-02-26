@@ -8,10 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Piece extends Actor {
     private Sprite sprite;
-    private Vector2 position = new Vector2(0, 0);
+    private Vector2 position = new Vector2(0,0);
 
     public Piece(Sprite sprite) {
         this.sprite = sprite;
+        this.positionChanged();
     }
 
     @Override
@@ -24,7 +25,7 @@ public class Piece extends Actor {
         Vector2 new_position = new Vector2(getX(), getY()); // Store it in a new variable in case the move is illegal
         if(new_position.x > 11 || new_position.x < 0 || new_position.y > 11 || new_position.y < 0) throw new IllegalArgumentException();
         this.sprite.setPosition(Gdx.graphics.getWidth()/12f*(0.25f+new_position.x), Gdx.graphics.getWidth()/12f*(0.25f+new_position.y));
-        position = new_position; // Movement complete, update stored position
+        this.position = new_position; // Movement complete, update stored position
     }
 
     public Vector2 getPosition() {

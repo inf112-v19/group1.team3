@@ -1,0 +1,10 @@
+package inf112.skeleton.app.Board;
+
+import java.util.EnumSet;
+
+public enum SquareType
+{
+    LASER, DOUBLE_LASER, TRIPLE_LASER, REPAIR, DOUBLE_REPAIR, CONVEYOR_WEST, CONVEYOR_EAST, CONVEYOR_NORTH, CONVEYOR_SOUTH, WALL_WEST, WALL_EAST, WALL_NORTH, WALL_SOUTH, HOLE, DOUBLE_CONVEYOR_NORTH, DOUBLE_CONVEYOR_SOUTH, DOUBLE_CONVEYOR_WEST, DOUBLE_CONVEYOR_EAST;
+
+    public static final EnumSet<SquareType> ALL = EnumSet.allOf(SquareType.class);
+}

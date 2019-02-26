@@ -7,24 +7,22 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import inf112.skeleton.app.Board.BoardPiece;
 import inf112.skeleton.app.Player.Piece;
 
 public class RoboRally implements ApplicationListener {
     private SpriteBatch batch;
-    private TextureRegion board;
+    private BoardPiece board;
     private Piece piece;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
 
-        this.board = new TextureRegion(new Texture(Gdx.files.internal("textures/board1.png")), 0, 0, 1800, 1800);
-        this.piece = new Piece(new Sprite(new Texture(Gdx.files.internal("textures/piece1.png")), 32, 32));
-
-        // Sets position on the 12x12 grid
-        piece.setPosition(11, 10);
+        //this.board = new TextureRegion(new Texture(Gdx.files.internal("textures/board1.png")), 0, 0, 1800, 1800);
+        this.board = new BoardPiece(new Sprite(new Texture(Gdx.files.internal("textures/board1.png"))), 12, 12);
+        this.piece = new Piece(new Sprite(new Texture(Gdx.files.internal("textures/piece1.png"))));
     }
 
     @Override
@@ -50,8 +48,16 @@ public class RoboRally implements ApplicationListener {
             System.err.println("Tried to move out of bounds");
         }
 
+        // Has moved, check board
+        if(piece.getPosition() != position)
+        {
+            System.out.println("Moved from " + position + " to " + piece.getPosition());
+            System.out.println(board.getSquareTypes((int) piece.getPosition().x, (int) piece.getPosition().y));
+        }
+
         batch.begin();
-        batch.draw(board, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //batch.draw(board, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        board.draw(batch, 1);
         piece.draw(batch, 1);
         batch.end();
     }
