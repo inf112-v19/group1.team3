@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Board;
+package inf112.skeleton.app.Boards.Board;
 
 import java.util.EnumSet;
 
