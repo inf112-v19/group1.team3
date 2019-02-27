@@ -2,6 +2,7 @@ package inf112.skeleton.app.Board;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import java.util.EnumSet;
@@ -9,21 +10,22 @@ import java.util.Vector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class BoardPiece extends Actor
+public class Piece extends Actor
 {
     private Sprite sprite;
-    private Vector<EnumSet<SquareType>> SquareTypes;
+    private Vector<EnumSet<SquareType>> squareTypes;
+    private Vector<Laser> lasers;
 
     private int width;
     private int height;
 
-    public BoardPiece(Sprite sprite, int width, int height) {
+    public Piece(Sprite sprite, int width, int height) {
         this.sprite = sprite;
         this.width = width;
         this.height = height;
 
         // Creates a list of length width*height containing empty bit flags
-        SquareTypes = IntStream.range(0, width*height).mapToObj(n -> EnumSet.noneOf(SquareType.class)).collect(Collectors.toCollection(Vector::new));
+        squareTypes = IntStream.range(0, width*height).mapToObj(n -> EnumSet.noneOf(SquareType.class)).collect(Collectors.toCollection(Vector::new));
         addSquareType(11, 0, SquareType.REPAIR);
         addSquareType(0, 11, SquareType.REPAIR);
         addSquareType(2, 2, SquareType.DOUBLE_REPAIR);
@@ -100,21 +102,25 @@ public class BoardPiece extends Actor
         addSquareType(4,3, SquareType.ROTATE_CW);
         addSquareType(2,6, SquareType.ROTATE_CW);
         addSquareType(8,6, SquareType.ROTATE_CW);
-        /*
-        addInLine(5, 10, Direction.WEST, 3, SquareType.LASER);
-        addInLine(2, 4, Direction.NORTH, 6, SquareType.LASER);
-        addInLine(7, 1, Direction.EAST, 3, SquareType.LASER);
-        addInLine(8, 5, Direction.NORTH, 3, SquareType.LASER);
-        addInLine(6, 3, Direction.WEST, 4, SquareType.DOUBLE_LASER);
-        addSquareType(1, 1, SquareType.TRIPLE_LASER);
-        */
 
-        //Todo: Laser system.
+        lasers = new Vector<>();
+
+        addLaser(5, 10, Direction.WEST, 1);
+        addLaser(2, 4, Direction.NORTH, 1);
+        addLaser(7, 1, Direction.EAST, 1);
+        addLaser(8, 5, Direction.NORTH, 1);
+        addLaser(6, 3, Direction.WEST, 2);
+        addLaser(1, 1, Direction.WEST, 3);
+    }
+
+    private void addLaser(int x, int y, Direction direction, int strength)
+    {
+        lasers.add(new Laser(direction, 1, new Vector2(x, y)));
     }
 
     private void addSquareType(int x, int y, SquareType type)
     {
-        this.SquareTypes.get(y*width+x).add(type);
+        this.squareTypes.get(y*width+x).add(type);
     }
 
     private void addInLine(int x, int y, Direction direction, int length, SquareType type)
@@ -140,7 +146,7 @@ public class BoardPiece extends Actor
 
     public EnumSet<SquareType> getSquareTypes(int x, int y)
     {
-        return this.SquareTypes.get(y*width+x);
+        return this.squareTypes.get(y*width+x);
     }
 
     @Override

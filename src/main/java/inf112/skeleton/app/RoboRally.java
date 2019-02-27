@@ -8,21 +8,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import inf112.skeleton.app.Board.BoardPiece;
-import inf112.skeleton.app.Player.Piece;
+import inf112.skeleton.app.Board.Piece;
 
 public class RoboRally implements ApplicationListener {
     private SpriteBatch batch;
-    private BoardPiece board;
-    private Piece piece;
+    private Piece board;
+    private inf112.skeleton.app.Player.Piece piece;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
 
         //this.board = new TextureRegion(new Texture(Gdx.files.internal("textures/board1.png")), 0, 0, 1800, 1800);
-        this.board = new BoardPiece(new Sprite(new Texture(Gdx.files.internal("textures/board1.png"))), 12, 12);
-        this.piece = new Piece(new Sprite(new Texture(Gdx.files.internal("textures/piece1.png"))));
+        this.board = new Piece(new Sprite(new Texture(Gdx.files.internal("textures/board1.png"))), 12, 12);
+        this.piece = new inf112.skeleton.app.Player.Piece(new Sprite(new Texture(Gdx.files.internal("textures/piece1.png"))));
     }
 
     @Override
