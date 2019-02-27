@@ -21,6 +21,25 @@ Det er noen på gruppen som er mer komfortabel med koding enn andre, og dette er
 bygges opp, hva skal skrives, kommentarer og alle kan skrive pseudo-kode. Så kan de som vil, skrive selve koden. Andre bidrar med med 
 text-filen til innlevering. 
 
+Deloppgave 2:
+
+De nye kravene som har kommet fra kundene er 
+-	Kunne få alle typer bevegelse kort som Roborally inkluderer: Bevege seg framover 1-3 felter eller bakover 1 felt, rotere høyre eller venstre 90 grader, eller rotere 180 grader
+-	Dele ut 9 programkort kort fra din egen kortstokk som inneholder 20 kort
+-	Velge ut fem programkort som man vil spille også bekrefte at man er klar for neste runde
+-	Utføre programmet etter spiller har valg sine 5 kort
+-	Besøke ulike flagg som er plassert rundt på brettet
+-	Hvis en robot går av brettet vil den bli automatisk ødelagt og man vil gå tilbake til den siste backupen man hadde i spillet
+-	Oppdatere backupen til en spiller hvis man en robot er stående på en skiftenøkkel i slutten av en fase
+-	Flytte backupen til en spiller når man har besøkt et flagg
+-	Kunne spille en fullverdig runde som inkluderer alle fem faser
+-	Få nye kort til neste runde
+
+Vår prioritert for denne fasen av utviklingen vil være å få på plass de tre første punktene i de nye kravene til kunden. Som er få kortstokken utdelt og spilleren til å godkjenne disse fem kortene. Vi vil også få på plass et flagg som spilleren kan besøka. Vi vil at spilleren skal funne få utdelt ni kort og kunne velge fem av disse kortene for å godkjennes til neste runder. Vi har gjort noen endringer i kundens prioritet siden vi føler det vil være enklere i utviklingen og begynne med å fullføre runden med kortene og vi har nedpriotert backupen og flagg delen av spillet siden dette er ikke så viktig akkurat nå siden vi ikke har flere spillere med i spillet og det vil være lettere å implementere dette etter vi har fått på plass bevegelse kortene og rundene.
+
+Vi vil verifisere kravene med å sjekke at det fungerer når vi har implementert dette i koden. Vi vil kjøre tester for å sjekke at kravene fungerer som vi ønsker i spillet. Vi vil også forhøre oss med kundekontakten og sjekke at kravene står i stil med det kunder ønsker og at de er fornøyd med det vi fokuserer på akkurat nå. 
+
+
 Referat 13.02
 Snakket om innleveringen, sjekket at innlevert kode fungerer hos alle.
 Snakket litt om videre jobbing, litt uklart her uten at vi vet hva vi skal gjøre til neste innlevering.
