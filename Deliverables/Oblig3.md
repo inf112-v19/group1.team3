@@ -67,6 +67,9 @@ om som har blitt gjort siden sist, hva man vil jobbe med denne timen og hva vi m
 Noen jobber med kode til brett, noen jobber med koden til kort, andre lager klassediagram. Det er viktig at alle er inneforstått med hva
 som skal gjørs til innlevering, men også til neste møte. Det er avtalt hva som skal være ferdig til gruppetimen i morgen, det nærmer seg 
 
+Referat 27.02
+Vi har fått på plass klassediagram. Vi har opprettet noen testklasser og en Player klasse. Vi har også snakket litt om hva vi vil ha i de forskjellige klassene, altså ulike metoder osv. Vi har snakket om kravene som skal være på plass til neste gang. Vi har også snakket om hvilke krav vi ville priotere til neste innlevering. Vi vil også generelt bli flinkere å oppdatere trello for å få oversikt over hva folk holder på med og har gjort. Vi vil også lage flere tester til spillet. Andrea var syk.
+
 
 Oppfølging til neste innlevering: 
 -Mer og litt bedre kommunikasjon
