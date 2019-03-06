@@ -70,6 +70,11 @@ som skal gjørs til innlevering, men også til neste møte. Det er avtalt hva so
 Referat 27.02
 Vi har fått på plass klassediagram. Vi har opprettet noen testklasser og en Player klasse. Vi har også snakket litt om hva vi vil ha i de forskjellige klassene, altså ulike metoder osv. Vi har snakket om kravene som skal være på plass til neste gang. Vi har også snakket om hvilke krav vi ville priotere til neste innlevering. Vi vil også generelt bli flinkere å oppdatere trello for å få oversikt over hva folk holder på med og har gjort. Vi vil også lage flere tester til spillet. Andrea var syk.
 
+Referat 06.03.
+Alle er tilstede og to dager til innlevering. Vi har fått på plass mange klasser og klassediagram. Jobber videre i timen med koding, oppdatering av diagrammet og gjennomgang av rettskjema. Her ser vi hva vi oppfyller av rettekrav og hva vi må fikse før innlevering på fredag. Møtes på fredag, kanskje vi kan spille robo rally. Dette vil gi oss bedre forståelse og det hadde vært spennende å teste ut det vi lager.  Vi har snart oppfylt de kravene vi har prioritert denne sprinten og brettet blir mer og mer komplett. 
+
+Vi må bruke Trello mere aktivt. 
+
 
 Oppfølging til neste innlevering: 
 -Mer og litt bedre kommunikasjon
