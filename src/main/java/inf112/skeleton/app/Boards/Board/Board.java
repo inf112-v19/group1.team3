@@ -180,6 +180,6 @@ public class Board extends Actor
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(sprite, 0, 0, 800, 800);
+        batch.draw(sprite, 0, 0, this.width*64, this.height*64);
     }
 }
