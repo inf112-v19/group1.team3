@@ -31,7 +31,120 @@ public class Board extends Actor
 
     protected void addLaser(int x, int y, Direction direction, int strength)
     {
-        lasers.add(new Laser(direction, 1, new Vector2(x, y)));
+        lasers.add(new Laser(direction, strength, new Vector2(x, y)));
+    }
+
+    public int getLasers(int x, int y)
+    {
+        int laserPower = 0;
+        for(Laser laser : lasers)
+        {
+            if(traceLaser(laser).contains(new Vector2((float) x, (float) y)))
+            {
+                laserPower += laser.strength;
+            }
+        }
+
+        return laserPower;
+    }
+
+    private Vector<Vector2> traceLaser(Laser laser)
+    {
+        Vector2 startPos = laser.position;
+        Vector<Vector2> positions = new Vector<>();
+        switch(laser.direction)
+        {
+            case NORTH:
+                for(float y = startPos.y; y < this.height; y++)
+                {
+                    EnumSet<SquareType> types = getSquareTypes((int) startPos.x, (int) y);
+                    if(types.contains(SquareType.WALL_NORTH))
+                    {
+                        // Stop after entering this square
+                        positions.add(new Vector2(startPos.x, y));
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_SOUTH) && y != startPos.y)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    // Todo: Check for players
+                    else
+                    {
+                        positions.add(new Vector2(startPos.x, y));
+                    }
+                }
+                return positions; // Hit no walls, exited map
+            case SOUTH: // TODO: Check if this actually works, currently no south-facing lasers
+                for(float y = startPos.y; y > 0; y--)
+                {
+                    EnumSet<SquareType> types = getSquareTypes((int) startPos.x, (int) y);
+                    if(types.contains(SquareType.WALL_SOUTH))
+                    {
+                        // Stop after entering this square
+                        positions.add(new Vector2(startPos.x, y));
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_NORTH) && y != startPos.y)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    // Todo: Check for players
+                    else
+                    {
+                        positions.add(new Vector2(startPos.x, y));
+                    }
+                }
+                return positions; // Hit no walls, exited map
+            case WEST:
+                for(float x = startPos.x; x > 0; x--)
+                {
+                    EnumSet<SquareType> types = getSquareTypes((int) x, (int) startPos.y);
+                    if(types.contains(SquareType.WALL_WEST))
+                    {
+                        // Stop after entering this square
+                        positions.add(new Vector2(x, startPos.y));
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_EAST) && x != startPos.x)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    // Todo: Check for players
+                    else
+                    {
+                        positions.add(new Vector2(x, startPos.y));
+                    }
+                }
+                return positions; // Hit no walls, exited map
+            case EAST:
+                for(float x = startPos.x; x < this.width; x++)
+                {
+                    EnumSet<SquareType> types = getSquareTypes((int) x, (int) startPos.y);
+                    if(types.contains(SquareType.WALL_EAST))
+                    {
+                        // Stop after entering this square
+                        positions.add(new Vector2(x, startPos.y));
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_WEST) && x != startPos.x)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    // Todo: Check for players
+                    else
+                    {
+                        positions.add(new Vector2(x, startPos.y));
+                    }
+                }
+                return positions; // Hit no walls, exited map
+        }
+
+        return positions;
     }
 
     protected void addSquareType(int x, int y, SquareType type)
