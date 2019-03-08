@@ -21,6 +21,10 @@ Det er noen på gruppen som er mer komfortabel med koding enn andre, og dette er
 bygges opp, hva skal skrives, kommentarer og alle kan skrive pseudo-kode. Så kan de som vil, skrive selve koden. Andre bidrar med med 
 text-filen til innlevering. 
 
+Vi bruker en scrum-metodikk der vi har møter, roller, sprinter og en trello tavle. Hvert møte starter med en gjennomgang av hva som har blitt gjort siden sist og hva som skal gjøre ila dette møtet. Vi bytter på roller fra sprint til sprint. I starten av denne sprinten satte vi opp tre mål vi ville jobbe med, og disse har vi gjort bra. Vi har hatt bedre komunikasjon, mere kommuniskajson og flere møter. Alle har gjort oppgavene sine til møtene/fristene som de ble satt opp til. Vi har fått på plass flere klasser, tester og et klasediagram som blir oppdatert.
+Vi setter opp tre nye mål vi vil jobbe med til neste innlevering. 
+Disse er: Å bevege brikken etter kort som blir valgt. Jobbe mer med parprogramering. Skrive god kod som alle forsår og hjelpe hverandre med kodingen.  
+
 Deloppgave 2:
 
 De nye kravene som har kommet fra kundene er 
@@ -39,12 +43,7 @@ Vår prioritert for denne fasen av utviklingen vil være å få på plass de tre
 
 Vi vil verifisere kravene med å sjekke at det fungerer med resten av koden når vi  implementerer dette i koden. Vi vil kjøre tester for å sjekke at kravene fungerer som vi ønsker i spillet. Vi vil også forhøre oss med kundekontakten og sjekke at kravene står i stil med det kunder ønsker og at de er fornøyd med det vi fokuserer på akkurat nå. Vi vil også sjekke med kundekontakten at de er fornøyd med hvordan vi har implementert kravene. 
 
-Vi bruker en scrum-metodikk der vi har møter, roller, sprinter og en trello tavle. Hvert møte starter med en gjennomgang av hva som har blitt jgort siden sist og hva som skal gjøre ila dette møtet. Vi bytter på roller fra sprint til sprint. I starten av denne sprinten satte vi opp tre mål vi ville jobbe med, og disse har vi gjort bra. Vi har hatt bedre komunikasjon, mere kommuniskajson og flere møter. Alle har gjort oppgavene sine til møtene/fristene som de ble satt opp til. Vi har fått på plass flere klasser, tester og et klasediagram som blir oppdatert.
-Vi setter opp tre nye mål vi vil jobbe med til neste innlevering. 
-Disse er: Å bevege brikken etter kort som blir valgt. Jobbe mer med parprogramering. Skrive god kod som alle forsår og hjelpe hverandre med kodingen.  
-
-
-
+ Vi har fått på plass et spillebrett. På spillebrettet ligger det ulike objekter som har en funksjon. Vi har ikke fått på plass hva disse funksjonene skal gjøres, men spillet vet hva de forskjellige tingene er. Dette inkluderer vegg, laser, flagg, skiftenøkkel, transportbånd, og et backup felt. I forhold til kortstokken har vi fått på plass metoder for å lage en kortstokk på 20 kort, hvor spilleren får 9 kort tilfeldig valgt som spilleren kan velge mellom. Av disse 9 kortene skal spilleren velge fem kort. Vi har metoder for at spilleren skal velge 5, men vi har ikke implementert bevegelse kortene ennå. 
 
 Referat 13.02
 Snakket om innleveringen, sjekket at innlevert kode fungerer hos alle.
