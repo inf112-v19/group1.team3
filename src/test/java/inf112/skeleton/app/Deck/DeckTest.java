@@ -16,7 +16,7 @@ public class DeckTest {
 
         //check that all elements in deck are Card objects
         for (int i = 0; i < deck.showCards().size(); i++){
-            assertTrue(deck.showCards().get(i) instanceof Card, true);
+            assertTrue(deck.showCards().get(i) instanceof Card);
         }
     }
 
@@ -32,11 +32,19 @@ public class DeckTest {
     }
 
     @Test
+    public void selectFiveRandom() {
+        Deck deck = new Deck();
+        assertEquals(deck.selectFiveRandom().size(), 5);
+        System.out.println(deck.selectFiveRandom());
+    }
+
+    @Test
     public void selectFive() {
         Deck deck = new Deck();
-        assertEquals(deck.selectFive().size(), 5);
-        System.out.println(deck.selectFive());
+        assertEquals(deck.selectFive(1,3,4,3,7).size(), 5);
+        System.out.println(deck.selectFive(1,3,4,3,7));
     }
+
 
     @Test
     public void selectNine() {
