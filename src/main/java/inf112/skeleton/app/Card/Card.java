@@ -1,5 +1,9 @@
 package inf112.skeleton.app.Card;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
 public class Card {
 
     private String cardType;
@@ -7,11 +11,17 @@ public class Card {
     private String move1 = "Move 1";
     private String move2 = "Move 2";
     private String move3 = "Move 3";
-    private String rightTurn = "Right Turn";
-    private String leftTurn = "Left Turn";
+    private String rightTurn = "Right turn";
+    private String leftTurn = "Left turn";
     private String uTurn = "U turn";
-    private String backUp = "Back up";
+    private String moveBack = "Move back";
     private String again = "Again";
+    private List<String> listOfCards = new ArrayList<>(Arrays.asList(move1, move2, move3, rightTurn,
+                                            leftTurn, uTurn, moveBack, again));
+    private int numOfCards = listOfCards.size();
+    /*powerUp to be used later
+    private String powerUp = "Power up";
+    */
 
     public Card(int x) {
 
@@ -35,7 +45,7 @@ public class Card {
                 cardType = uTurn;
                 break;
             case 7:
-                cardType = backUp;
+                cardType = moveBack;
                 break;
             case 8:
                 cardType = again;
@@ -45,6 +55,24 @@ public class Card {
                 break;
         }
     }
+
+    //add item in list of cards
+    public void addCardToList(String card) {
+
+        listOfCards.add(card);
+    }
+
+    //remove item in list of cards
+    public void removeCardFromList(int index) {
+
+        listOfCards.remove(index);
+    }
+
+    public int getNumOfCards() {
+
+        return listOfCards.size();
+    }
+
 
     @Override
     public String toString() {
