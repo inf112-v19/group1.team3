@@ -39,6 +39,11 @@ Vår prioritert for denne fasen av utviklingen vil være å få på plass de tre
 
 Vi vil verifisere kravene med å sjekke at det fungerer med resten av koden når vi  implementerer dette i koden. Vi vil kjøre tester for å sjekke at kravene fungerer som vi ønsker i spillet. Vi vil også forhøre oss med kundekontakten og sjekke at kravene står i stil med det kunder ønsker og at de er fornøyd med det vi fokuserer på akkurat nå. Vi vil også sjekke med kundekontakten at de er fornøyd med hvordan vi har implementert kravene. 
 
+Vi bruker en scrum-metodikk der vi har møter, roller, sprinter og en trello tavle. Hvert møte starter med en gjennomgang av hva som har blitt jgort siden sist og hva som skal gjøre ila dette møtet. Vi bytter på roller fra sprint til sprint. I starten av denne sprinten satte vi opp tre mål vi ville jobbe med, og disse har vi gjort bra. Vi har hatt bedre komunikasjon, mere kommuniskajson og flere møter. Alle har gjort oppgavene sine til møtene/fristene som de ble satt opp til. Vi har fått på plass flere klasser, tester og et klasediagram som blir oppdatert.
+Vi setter opp tre nye mål vi vil jobbe med til neste innlevering. 
+Disse er: Å bevege brikken etter kort som blir valgt. Jobbe mer med parprogramering. Skrive god kod som alle forsår og hjelpe hverandre med kodingen.  
+
+
 
 
 Referat 13.02
@@ -76,8 +81,13 @@ Alle er tilstede og to dager til innlevering. Vi har fått på plass mange klass
 
 Vi må bruke Trello mere aktivt. 
 
+Referat 08.03. 
+I dag skal oblig 3 levers og vi møttes for å gå gjenom alle punktene på rettskjema, slik at vi har alt som skal leveres og alle vet hva vi har så langt. Alle er tilstede. Vi har kommet godt i gang, vi jobber godt sammen. Denne sprinten har vi møttes oftere og hatt litt bedre kommunikasjon som var mål fra forrige oblig. Vi gikk gjennom innleveringen sammen, snakket om hvordan denne sprinten har vært - og om det er forbedringspotensialer til neste gang. Alle i gruppen er enige, og vi er fornøyd med det vi har fått til. Vi skulle egentlig spile robo rally, men fikk ikke tak i brettspille i tide. 
 
-Oppfølging til neste innlevering: 
+
+
+
+Oppfølging til denne innlevering (oblig 2): 
 -Mer og litt bedre kommunikasjon
 -Alle gjør sine deler til fristen 
 -Lage klassediragram og kode for noen nye klasser 
