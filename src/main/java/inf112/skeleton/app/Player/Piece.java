@@ -24,7 +24,8 @@ public class Piece extends Actor {
     protected void positionChanged() {
         Vector2 new_position = new Vector2(getX(), getY()); // Store it in a new variable in case the move is illegal
         if(new_position.x > 11 || new_position.x < 0 || new_position.y > 11 || new_position.y < 0) throw new IllegalArgumentException();
-        this.sprite.setPosition(Gdx.graphics.getWidth()/12f*(0.25f+new_position.x), Gdx.graphics.getWidth()/12f*(0.25f+new_position.y));
+        //this.sprite.setPosition(Gdx.graphics.getWidth()/12f*(0.25f+new_position.x), Gdx.graphics.getWidth()/12f*(0.25f+new_position.y));
+        this.sprite.setPosition(64*new_position.x+16, 64*new_position.y+16);
         this.position = new_position; // Movement complete, update stored position
     }
 

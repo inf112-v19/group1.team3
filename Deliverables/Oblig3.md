@@ -35,9 +35,10 @@ De nye kravene som har kommet fra kundene er
 -	Kunne spille en fullverdig runde som inkluderer alle fem faser
 -	Få nye kort til neste runde
 
-Vår prioritert for denne fasen av utviklingen vil være å få på plass de tre første punktene i de nye kravene til kunden. Som er få kortstokken utdelt og spilleren til å godkjenne disse fem kortene. Vi vil også få på plass et flagg som spilleren kan besøka. Vi vil at spilleren skal funne få utdelt ni kort og kunne velge fem av disse kortene for å godkjennes til neste runder. Vi har gjort noen endringer i kundens prioritet siden vi føler det vil være enklere i utviklingen og begynne med å fullføre runden med kortene og vi har nedpriotert backupen og flagg delen av spillet siden dette er ikke så viktig akkurat nå siden vi ikke har flere spillere med i spillet og det vil være lettere å implementere dette etter vi har fått på plass bevegelse kortene og rundene.
+Vår prioritert for denne fasen av utviklingen vil være å få på plass de tre første punktene i de nye kravene til kunden. Som er få kortstokken utdelt og spilleren til å godkjenne disse fem kortene. Vi vil også få på plass et flagg som spilleren kan besøka. Vi vil at spilleren skal kunne få utdelt ni kort og kunne velge fem av disse kortene for å godkjennes til neste runder. Vi har gjort noen endringer i kundens prioritet siden vi føler det vil være enklere i utviklingen og få på plass runden med kortene og vi har nedpriotert backupen delen av spillet siden dette er ikke så viktig akkurat nå siden vi ikke har flere spillere med i spillet og det vil være lettere å implementere dette etter vi har fått på plass bevegelse kortene, fasene og rundene. Det har også kommet noen options kort, men akkurat nå har vi ikke sett på disse options kortene fordi vi vil først få på plass de grunnleggende kravene i oppgaven for å få spillet til å kjøre. Options kortene er noe vi vil se på hvis vi har nok tid og fått på plass alle de grunnleggende kravene. Vi har også valgt å fokusere på disse kravene siden de tre første kravene hører sammen akkurat som de fire neste kravene hører sammen, i den form av at å implementere kravene vil ta den samme metodene
 
-Vi vil verifisere kravene med å sjekke at det fungerer når vi har implementert dette i koden. Vi vil kjøre tester for å sjekke at kravene fungerer som vi ønsker i spillet. Vi vil også forhøre oss med kundekontakten og sjekke at kravene står i stil med det kunder ønsker og at de er fornøyd med det vi fokuserer på akkurat nå. 
+Vi vil verifisere kravene med å sjekke at det fungerer med resten av koden når vi  implementerer dette i koden. Vi vil kjøre tester for å sjekke at kravene fungerer som vi ønsker i spillet. Vi vil også forhøre oss med kundekontakten og sjekke at kravene står i stil med det kunder ønsker og at de er fornøyd med det vi fokuserer på akkurat nå. Vi vil også sjekke med kundekontakten at de er fornøyd med hvordan vi har implementert kravene. 
+
 
 
 Referat 13.02
@@ -69,6 +70,11 @@ som skal gjørs til innlevering, men også til neste møte. Det er avtalt hva so
 
 Referat 27.02
 Vi har fått på plass klassediagram. Vi har opprettet noen testklasser og en Player klasse. Vi har også snakket litt om hva vi vil ha i de forskjellige klassene, altså ulike metoder osv. Vi har snakket om kravene som skal være på plass til neste gang. Vi har også snakket om hvilke krav vi ville priotere til neste innlevering. Vi vil også generelt bli flinkere å oppdatere trello for å få oversikt over hva folk holder på med og har gjort. Vi vil også lage flere tester til spillet. Andrea var syk.
+
+Referat 06.03.
+Alle er tilstede og to dager til innlevering. Vi har fått på plass mange klasser og klassediagram. Jobber videre i timen med koding, oppdatering av diagrammet og gjennomgang av rettskjema. Her ser vi hva vi oppfyller av rettekrav og hva vi må fikse før innlevering på fredag. Møtes på fredag, kanskje vi kan spille robo rally. Dette vil gi oss bedre forståelse og det hadde vært spennende å teste ut det vi lager.  Vi har snart oppfylt de kravene vi har prioritert denne sprinten og brettet blir mer og mer komplett. 
+
+Vi må bruke Trello mere aktivt. 
 
 
 Oppfølging til neste innlevering: 

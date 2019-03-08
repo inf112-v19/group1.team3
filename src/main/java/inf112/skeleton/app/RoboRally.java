@@ -53,6 +53,7 @@ public class RoboRally implements ApplicationListener {
         {
             System.out.println("Moved from " + position + " to " + piece.getPosition());
             System.out.println(board.getSquareTypes((int) piece.getPosition().x, (int) piece.getPosition().y));
+            System.out.println("Hit laser: " + board.getLasers((int) piece.getPosition().x, (int) piece.getPosition().y));
         }
 
         batch.begin();
