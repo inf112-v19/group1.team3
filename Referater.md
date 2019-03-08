@@ -37,3 +37,13 @@ hva vi vil ha i de forskjellige klassene, altså ulike metoder osv. Vi har snakk
 neste gang. Vi har også snakket om hvilke krav vi ville priotere til neste innlevering. Vi vil også generelt bli 
 flinkere å oppdatere trello for å få oversikt over hva folk holder på med og har gjort. Vi vil også lage flere tester 
 til spillet. Andrea var syk.
+
+### 06.03
+Alle er tilstede og to dager til innlevering. Vi har fått på plass mange klasser og klassediagram. Jobber videre i timen med koding, oppdatering av diagrammet og gjennomgang av rettskjema. Her ser vi hva vi oppfyller av rettekrav og hva vi må fikse før innlevering på fredag. Møtes på fredag, kanskje vi kan spille robo rally. Dette vil gi oss bedre forståelse og det hadde vært spennende å teste ut det vi lager.  Vi har snart oppfylt de kravene vi har prioritert denne sprinten og brettet blir mer og mer komplett. 
+
+Vi må bruke Trello mere aktivt. 
+
+### 08.03
+I dag skal oblig 3 levers og vi møttes for å gå gjenom alle punktene på rettskjema, slik at vi har alt som skal leveres og alle vet hva vi har så langt. Alle er tilstede. Vi har kommet godt i gang, vi jobber godt sammen. Denne sprinten har vi møttes oftere og hatt litt bedre kommunikasjon som var mål fra forrige oblig. Vi gikk gjennom innleveringen sammen, snakket om hvordan denne sprinten har vært - og om det er forbedringspotensialer til neste gang. Alle i gruppen er enige, og vi er fornøyd med det vi har fått til. Vi skulle egentlig spile robo rally, men fikk ikke tak i brettspille i tide. 
+
+
