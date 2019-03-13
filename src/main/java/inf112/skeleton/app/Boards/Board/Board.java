@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import inf112.skeleton.app.Direction;
 
 import java.util.EnumSet;
 import java.util.Vector;
@@ -58,15 +59,16 @@ public class Board extends Actor
                 for(float y = startPos.y; y < this.height; y++)
                 {
                     EnumSet<SquareType> types = getSquareTypes((int) startPos.x, (int) y);
-                    if(types.contains(SquareType.WALL_NORTH))
+
+                    if(types.contains(SquareType.WALL_SOUTH) && y != startPos.y)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_NORTH))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(startPos.x, y));
-                        return positions;
-                    }
-                    else if(types.contains(SquareType.WALL_SOUTH) && y != startPos.y)
-                    {
-                        // Don't enter this square
                         return positions;
                     }
                     // Todo: Check for players
@@ -80,15 +82,16 @@ public class Board extends Actor
                 for(float y = startPos.y; y > 0; y--)
                 {
                     EnumSet<SquareType> types = getSquareTypes((int) startPos.x, (int) y);
-                    if(types.contains(SquareType.WALL_SOUTH))
+
+                    if(types.contains(SquareType.WALL_NORTH) && y != startPos.y)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_SOUTH))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(startPos.x, y));
-                        return positions;
-                    }
-                    else if(types.contains(SquareType.WALL_NORTH) && y != startPos.y)
-                    {
-                        // Don't enter this square
                         return positions;
                     }
                     // Todo: Check for players
@@ -102,15 +105,16 @@ public class Board extends Actor
                 for(float x = startPos.x; x > 0; x--)
                 {
                     EnumSet<SquareType> types = getSquareTypes((int) x, (int) startPos.y);
-                    if(types.contains(SquareType.WALL_WEST))
+
+                    if(types.contains(SquareType.WALL_EAST) && x != startPos.x)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_WEST))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(x, startPos.y));
-                        return positions;
-                    }
-                    else if(types.contains(SquareType.WALL_EAST) && x != startPos.x)
-                    {
-                        // Don't enter this square
                         return positions;
                     }
                     // Todo: Check for players
@@ -124,15 +128,16 @@ public class Board extends Actor
                 for(float x = startPos.x; x < this.width; x++)
                 {
                     EnumSet<SquareType> types = getSquareTypes((int) x, (int) startPos.y);
-                    if(types.contains(SquareType.WALL_EAST))
+
+                    if(types.contains(SquareType.WALL_WEST) && x != startPos.x)
+                    {
+                        // Don't enter this square
+                        return positions;
+                    }
+                    else if(types.contains(SquareType.WALL_EAST))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(x, startPos.y));
-                        return positions;
-                    }
-                    else if(types.contains(SquareType.WALL_WEST) && x != startPos.x)
-                    {
-                        // Don't enter this square
                         return positions;
                     }
                     // Todo: Check for players
@@ -149,6 +154,7 @@ public class Board extends Actor
 
     protected void addSquareType(int x, int y, SquareType type)
     {
+        if (x < 0 || x > width || y < 0 || y > height) { throw new IndexOutOfBoundsException(); }
         this.squareTypes.get(y*width+x).add(type);
     }
 

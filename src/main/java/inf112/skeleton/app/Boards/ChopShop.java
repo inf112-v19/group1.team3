@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Boards.Board.Board;
-import inf112.skeleton.app.Boards.Board.Direction;
+import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Boards.Board.SquareType;
 
 public class ChopShop extends Board {
