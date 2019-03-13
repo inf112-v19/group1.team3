@@ -1,6 +1,6 @@
 package inf112.skeleton.app.Boards.Board;
 
-import inf112.skeleton.app.Boards.Board.Board;
+import inf112.skeleton.app.Direction;
 import org.junit.Test;
 
 import java.util.concurrent.ThreadLocalRandom;

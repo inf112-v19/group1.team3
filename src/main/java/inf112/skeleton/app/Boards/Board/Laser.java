@@ -1,6 +1,7 @@
 package inf112.skeleton.app.Boards.Board;
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.skeleton.app.Direction;
 
 class Laser {
     public Direction direction;

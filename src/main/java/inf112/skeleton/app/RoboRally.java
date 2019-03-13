@@ -22,7 +22,7 @@ public class RoboRally implements ApplicationListener {
 
         //this.board = new TextureRegion(new Texture(Gdx.files.internal("textures/board1.png")), 0, 0, 1800, 1800);
         this.board = new ChopShop();
-        this.piece = new inf112.skeleton.app.Player.Piece(new Sprite(new Texture(Gdx.files.internal("textures/piece1.png"))));
+        this.piece = new inf112.skeleton.app.Player.Piece("textures/piece1/$dir.png");
     }
 
     @Override
@@ -38,10 +38,10 @@ public class RoboRally implements ApplicationListener {
         Vector2 position = piece.getPosition();
         try
         {
-            if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) piece.setPosition(position.x, position.y-1);
-            if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) piece.setPosition(position.x, position.y+1);
-            if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) piece.setPosition(position.x-1, position.y);
-            if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) piece.setPosition(position.x+1, position.y);
+            if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) piece.setPosition(piece.getBackward());
+            if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) piece.setPosition(piece.getForward());
+            if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) piece.rotateCCW();
+            if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) piece.rotateCW();
         }
         catch(IllegalArgumentException e)
         {
