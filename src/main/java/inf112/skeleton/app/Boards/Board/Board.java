@@ -35,6 +35,11 @@ public class Board extends Actor
         lasers.add(new Laser(direction, strength, new Vector2(x, y)));
     }
 
+    public int getLasers(Vector2 pos)
+    {
+        return getLasers((int) pos.x, (int) pos.y);
+    }
+
     public int getLasers(int x, int y)
     {
         int laserPower = 0;

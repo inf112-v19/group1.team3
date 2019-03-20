@@ -52,6 +52,19 @@ public class Game
                 System.err.println("Tried to move out of bounds");
             }
         }
+
+        if(input.isKeyJustPressed(Input.Keys.SPACE))
+        {
+            for(int i = 0; i < players.size(); i++)
+            {
+                Piece piece = players.get(i).piece;
+                int damage = board.getLasers(piece.getPosition());
+                if (damage > 0)
+                {
+                    System.out.println("Player " + (i+1) + " got hit for " + damage + " damage.");
+                }
+            }
+        }
     }
 
     // inf112.skeleton.app.Game step by step
