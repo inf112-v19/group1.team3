@@ -1,13 +1,20 @@
 
 import inf112.skeleton.app.Boards.Board.Board;
 import inf112.skeleton.app.Boards.ChopShop;
+import inf112.skeleton.app.Deck.Deck;
 import inf112.skeleton.app.Player.Player;
 import inf112.skeleton.app.Player.Player;
+
+import java.util.ArrayList;
 
 
 public class Game {
 
 
+    Board board;
+    int numOfPlayers;
+    ArrayList<Player> Players;
+    Deck deck;
 
 
     public Game (Board board, int numOfPlayers)  {
@@ -17,7 +24,7 @@ public class Game {
     }
 
     // Game step by step
-    
+
     // New game
     // Chooce a name:
     // New Round
