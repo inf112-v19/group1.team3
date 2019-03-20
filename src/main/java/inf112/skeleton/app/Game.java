@@ -1,13 +1,14 @@
 package inf112.skeleton.app;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Boards.Board.Board;
 import inf112.skeleton.app.Boards.ChopShop;
+import inf112.skeleton.app.Player.Piece;
 import inf112.skeleton.app.Player.Player;
 import inf112.skeleton.app.Player.Player;
 
 import java.util.ArrayList;
-
 
 public class Game
 {
@@ -21,6 +22,7 @@ public class Game
         for(int i = 0; i < numOfPlayers; i++)
         {
             players.add(i, new Player("textures/piece1/$dir.png"));
+            players.get(i).piece.setPosition(i*2+2, 0);
         }
     }
 
@@ -30,6 +32,25 @@ public class Game
         for (Player player : players)
         {
             player.piece.draw(batch, 1);
+        }
+    }
+
+    public void handleInput(Input input)
+    {
+        for (Player player : players)
+        {
+            Piece piece = player.piece;
+            try
+            {
+                if(input.isKeyJustPressed(Input.Keys.DOWN)) piece.setPosition(piece.getBackward());
+                if(input.isKeyJustPressed(Input.Keys.UP)) piece.setPosition(piece.getForward());
+                if(input.isKeyJustPressed(Input.Keys.LEFT)) piece.rotateCCW();
+                if(input.isKeyJustPressed(Input.Keys.RIGHT)) piece.rotateCW();
+            }
+            catch(IllegalArgumentException e)
+            {
+                System.err.println("Tried to move out of bounds");
+            }
         }
     }
 
