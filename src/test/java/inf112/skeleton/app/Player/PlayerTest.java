@@ -11,6 +11,6 @@ public class PlayerTest {
 
     @Test
     public void getPosition() {
-        System.out.println(player.getPosition());
+        System.out.println(player.piece.getPosition());
     }
 }

@@ -112,7 +112,6 @@ public class BoardTest {
         assertEquals(board.getLasers(11, 0), 0);
 
         board.addSquareType(10, 0, SquareType.WALL_WEST);
-        System.out.println(board.getLasers(10, 0));
         assertEquals(board.getLasers(10, 0), 0);
     }
 }
