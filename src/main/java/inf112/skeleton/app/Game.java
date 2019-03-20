@@ -1,22 +1,39 @@
+package inf112.skeleton.app;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Boards.Board.Board;
 import inf112.skeleton.app.Boards.ChopShop;
 import inf112.skeleton.app.Player.Player;
 import inf112.skeleton.app.Player.Player;
 
-
-public class Game {
-
+import java.util.ArrayList;
 
 
+public class Game
+{
+    private Board board;
+    private ArrayList<Player> players;
 
-    public Game (Board board, int numOfPlayers)  {
-
-
-
+    public Game(Board board, int numOfPlayers)
+    {
+        this.board = board;
+        players = new ArrayList<>(numOfPlayers);
+        for(int i = 0; i < numOfPlayers; i++)
+        {
+            players.add(i, new Player("textures/piece1/$dir.png"));
+        }
     }
 
-    // Game step by step
+    public void draw(SpriteBatch batch)
+    {
+        board.draw(batch, 1);
+        for (Player player : players)
+        {
+            player.piece.draw(batch, 1);
+        }
+    }
+
+    // inf112.skeleton.app.Game step by step
     
     // New game
     // Chooce a name:
@@ -33,7 +50,7 @@ public class Game {
 
     /*  Loop logic
 
-        Game {
+        inf112.skeleton.app.Game {
 
             Round {
 
