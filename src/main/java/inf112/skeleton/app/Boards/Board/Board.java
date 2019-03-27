@@ -45,7 +45,7 @@ public class Board extends Actor
         int laserPower = 0;
         for(Laser laser : lasers)
         {
-            if(traceLaser(laser).contains(new Vector2((float) x, (float) y)))
+            if(traceLaser(laser).getPositions().contains(new Vector2((float) x, (float) y)))
             {
                 laserPower += laser.strength;
             }
@@ -54,12 +54,12 @@ public class Board extends Actor
         return laserPower;
     }
 
-    private Vector<Vector2> traceLaser(Laser laser)
+    private TraceResult traceLaser(Laser laser)
     {
         return traceLine(laser.position, laser.direction);
     }
 
-    public Vector<Vector2> traceLine(Vector2 startPos, Direction direction)
+    public TraceResult traceLine(Vector2 startPos, Direction direction)
     {
         Vector<Vector2> positions = new Vector<>();
         switch(direction)
@@ -72,13 +72,13 @@ public class Board extends Actor
                     if(types.contains(SquareType.WALL_SOUTH) && y != startPos.y)
                     {
                         // Don't enter this square
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     else if(types.contains(SquareType.WALL_NORTH))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(startPos.x, y));
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     // Todo: Check for players
                     else
@@ -86,22 +86,22 @@ public class Board extends Actor
                         positions.add(new Vector2(startPos.x, y));
                     }
                 }
-                return positions; // Hit no walls, exited map
-            case SOUTH: // TODO: Check if this actually works, currently no south-facing lasers
-                for(float y = startPos.y; y > 0; y--)
+                return new TraceResult(positions, false); // Hit no walls, exited map
+            case SOUTH:
+                for(float y = startPos.y; y >= 0; y--)
                 {
                     EnumSet<SquareType> types = getSquareTypes((int) startPos.x, (int) y);
 
                     if(types.contains(SquareType.WALL_NORTH) && y != startPos.y)
                     {
                         // Don't enter this square
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     else if(types.contains(SquareType.WALL_SOUTH))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(startPos.x, y));
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     // Todo: Check for players
                     else
@@ -109,22 +109,22 @@ public class Board extends Actor
                         positions.add(new Vector2(startPos.x, y));
                     }
                 }
-                return positions; // Hit no walls, exited map
+                return new TraceResult(positions, false); // Hit no walls, exited map
             case WEST:
-                for(float x = startPos.x; x > 0; x--)
+                for(float x = startPos.x; x >= 0; x--)
                 {
                     EnumSet<SquareType> types = getSquareTypes((int) x, (int) startPos.y);
 
                     if(types.contains(SquareType.WALL_EAST) && x != startPos.x)
                     {
                         // Don't enter this square
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     else if(types.contains(SquareType.WALL_WEST))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(x, startPos.y));
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     // Todo: Check for players
                     else
@@ -132,7 +132,7 @@ public class Board extends Actor
                         positions.add(new Vector2(x, startPos.y));
                     }
                 }
-                return positions; // Hit no walls, exited map
+                return new TraceResult(positions, false); // Hit no walls, exited map
             case EAST:
                 for(float x = startPos.x; x < this.width; x++)
                 {
@@ -141,13 +141,13 @@ public class Board extends Actor
                     if(types.contains(SquareType.WALL_WEST) && x != startPos.x)
                     {
                         // Don't enter this square
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     else if(types.contains(SquareType.WALL_EAST))
                     {
                         // Stop after entering this square
                         positions.add(new Vector2(x, startPos.y));
-                        return positions;
+                        return new TraceResult(positions);
                     }
                     // Todo: Check for players
                     else
@@ -155,15 +155,25 @@ public class Board extends Actor
                         positions.add(new Vector2(x, startPos.y));
                     }
                 }
-                return positions; // Hit no walls, exited map
+                return new TraceResult(positions, false); // Hit no walls, exited map
         }
 
-        return positions;
+        return new TraceResult(positions, false);
+    }
+
+    public boolean isInBounds(Vector2 pos)
+    {
+        return isInBounds((int) pos.x, (int) pos.y);
+    }
+
+    public boolean isInBounds(int x, int y)
+    {
+        return !(x < 0 || x > width || y < 0 || y > height);
     }
 
     protected void addSquareType(int x, int y, SquareType type)
     {
-        if (x < 0 || x > width || y < 0 || y > height) { throw new IndexOutOfBoundsException(); }
+        if (!isInBounds(x, y)) { throw new IndexOutOfBoundsException(); }
         this.squareTypes.get(y*width+x).add(type);
     }
 

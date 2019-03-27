@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Boards.Board.Board;
 import inf112.skeleton.app.Boards.Board.SquareType;
+import inf112.skeleton.app.Boards.Board.TraceResult;
 import inf112.skeleton.app.Boards.ChopShop;
 import inf112.skeleton.app.Player.Piece;
 import inf112.skeleton.app.Player.Player;
@@ -38,23 +39,36 @@ public class Game
 
     public void handleInput(Input input)
     {
-        for (Player player : players)
+        for(int i = 0; i < players.size(); i++)
         {
+            Player player = players.get(i);
             Piece piece = player.piece;
             try
             {
                 if(input.isKeyJustPressed(Input.Keys.DOWN))
                 {
-                    if(board.traceLine(piece.getPosition(), piece.getDirection()).contains(piece.getBackward()))
+                    TraceResult trace = board.traceLine(piece.getPosition(), Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
+                    if(trace.getPositions().contains(piece.getBackward()))
                     {
                         piece.setPosition(piece.getBackward());
+                    }
+                    else if(!trace.hitWall())
+                    {
+                        System.out.println("Player " + i + " left the map.");
+                        piece.setPosition(i*2+2, 0);
                     }
                 }
                 if(input.isKeyJustPressed(Input.Keys.UP))
                 {
-                    if(board.traceLine(piece.getPosition(), piece.getDirection()).contains(piece.getForward()))
+                    TraceResult trace = board.traceLine(piece.getPosition(), piece.getDirection());
+                    if(trace.getPositions().contains(piece.getForward()))
                     {
                         piece.setPosition(piece.getForward());
+                    }
+                    else if(!trace.hitWall())
+                    {
+                        System.out.println("Player " + i + " left the map.");
+                        piece.setPosition(i*2+2, 0);
                     }
                 }
                 if(input.isKeyJustPressed(Input.Keys.LEFT)) piece.rotateCCW();
