@@ -56,9 +56,13 @@ public class Board extends Actor
 
     private Vector<Vector2> traceLaser(Laser laser)
     {
-        Vector2 startPos = laser.position;
+        return traceLine(laser.position, laser.direction);
+    }
+
+    public Vector<Vector2> traceLine(Vector2 startPos, Direction direction)
+    {
         Vector<Vector2> positions = new Vector<>();
-        switch(laser.direction)
+        switch(direction)
         {
             case NORTH:
                 for(float y = startPos.y; y < this.height; y++)
@@ -183,6 +187,8 @@ public class Board extends Actor
                 break;
         }
     }
+
+    public EnumSet<SquareType> getSquareTypes(Vector2 pos){ return getSquareTypes((int) pos.x, (int) pos.y); }
 
     public EnumSet<SquareType> getSquareTypes(int x, int y)
     {

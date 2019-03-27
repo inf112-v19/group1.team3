@@ -66,4 +66,5 @@ public class Piece extends Actor {
     public Vector2 getPosition() {
         return position;
     }
+    public Direction getDirection() { return direction; }
 }

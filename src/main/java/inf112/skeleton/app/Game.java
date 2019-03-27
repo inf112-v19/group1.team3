@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Boards.Board.Board;
+import inf112.skeleton.app.Boards.Board.SquareType;
 import inf112.skeleton.app.Boards.ChopShop;
 import inf112.skeleton.app.Player.Piece;
 import inf112.skeleton.app.Player.Player;
@@ -42,8 +43,20 @@ public class Game
             Piece piece = player.piece;
             try
             {
-                if(input.isKeyJustPressed(Input.Keys.DOWN)) piece.setPosition(piece.getBackward());
-                if(input.isKeyJustPressed(Input.Keys.UP)) piece.setPosition(piece.getForward());
+                if(input.isKeyJustPressed(Input.Keys.DOWN))
+                {
+                    if(board.traceLine(piece.getPosition(), piece.getDirection()).contains(piece.getBackward()))
+                    {
+                        piece.setPosition(piece.getBackward());
+                    }
+                }
+                if(input.isKeyJustPressed(Input.Keys.UP))
+                {
+                    if(board.traceLine(piece.getPosition(), piece.getDirection()).contains(piece.getForward()))
+                    {
+                        piece.setPosition(piece.getForward());
+                    }
+                }
                 if(input.isKeyJustPressed(Input.Keys.LEFT)) piece.rotateCCW();
                 if(input.isKeyJustPressed(Input.Keys.RIGHT)) piece.rotateCW();
             }
@@ -62,6 +75,12 @@ public class Game
                 if (damage > 0)
                 {
                     System.out.println("Player " + (i+1) + " got hit for " + damage + " damage.");
+                }
+
+                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.HOLE))
+                {
+                    System.out.println("Player " + (i+1) + " fell in a hole.");
+                    piece.setPosition(i*2+2, 0);
                 }
             }
         }
