@@ -10,7 +10,11 @@ import inf112.skeleton.app.Boards.Board.SquareType;
 public class ChopShop extends Board {
     public ChopShop()
     {
-        super(new Sprite(new Texture(Gdx.files.internal("textures/board1.png"))), 12, 12);
+        this(new Sprite(new Texture(Gdx.files.internal("textures/board1.png"))));
+    }
+    public ChopShop(Sprite sprite)
+    {
+        super(sprite, 12, 12);
 
         addSquareType(11, 0, SquareType.REPAIR);
         addSquareType(0, 11, SquareType.REPAIR);

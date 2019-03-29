@@ -13,6 +13,15 @@ public class Piece extends Actor {
     private Vector2 position = new Vector2(0,0);
     private Direction direction = Direction.NORTH;
 
+    public Piece()
+    {
+        this.sprites[0] = null;
+        this.sprites[1] = null;
+        this.sprites[2] = null;
+        this.sprites[3] = null;
+        this.positionChanged();
+    }
+
     public Piece(String spritePath) {
         this.sprites[0] = new Sprite(new Texture(Gdx.files.internal(spritePath.replace("$dir", "north"))));
         this.sprites[1] = new Sprite(new Texture(Gdx.files.internal(spritePath.replace("$dir", "east"))));
@@ -30,6 +39,8 @@ public class Piece extends Actor {
     {
         direction = Direction.rotateCCW(direction);
     }
+
+    public void setDirection(Direction direction){ this.direction = direction; }
 
     public Vector2 getForward()
     {
@@ -58,7 +69,7 @@ public class Piece extends Actor {
         if(new_position.x > 11 || new_position.x < 0 || new_position.y > 11 || new_position.y < 0) throw new IllegalArgumentException();
         for(Sprite sprite : sprites)
         {
-            sprite.setPosition(64*new_position.x+16, 64*new_position.y+16);
+            if (sprite != null) sprite.setPosition(64*new_position.x+16, 64*new_position.y+16);
         }
         this.position = new_position; // Movement complete, update stored position
     }
