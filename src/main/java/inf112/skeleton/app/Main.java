@@ -24,12 +24,14 @@ public class Main {
         }
         else if (Arrays.asList(args).contains("--client"))
         {
+            String addr = args[Arrays.asList(args).indexOf("--client")+1];
+
             LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
             cfg.title = "RoboRally";
             cfg.width = 768+300; // Add space for the UI
             cfg.height = 768;
 
-            new LwjglApplication(new RoboRally(), cfg);
+            new LwjglApplication(new RoboRally(addr), cfg);
         }
         else
         {

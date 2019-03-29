@@ -2,6 +2,7 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import inf112.skeleton.app.Boards.Board.Board;
 import inf112.skeleton.app.Boards.Board.SquareType;
 import inf112.skeleton.app.Boards.Board.TraceResult;
@@ -45,73 +46,106 @@ public class Game
         }
     }
 
-    public void handleInput(Input input)
+    public void handleCommand(Command command)
     {
-        for(int i = 0; i < players.size(); i++)
+        if (!command.command.equals("KEY")) return;
+        int key = Integer.parseInt(command.value);
+        Player player = players.get(command.id);
+        Piece piece = player.piece;
+        try
         {
-            Player player = players.get(i);
-            Piece piece = player.piece;
-            try
+            if(key == Input.Keys.DOWN)
             {
-                if(input.isKeyJustPressed(Input.Keys.DOWN))
+                TraceResult trace = board.traceLine(piece.getPosition(), Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
+                if(trace.getPositions().contains(piece.getBackward()))
                 {
-                    TraceResult trace = board.traceLine(piece.getPosition(), Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
-                    if(trace.getPositions().contains(piece.getBackward()))
-                    {
-                        piece.setPosition(piece.getBackward());
-                    }
-                    else if(!trace.hitWall())
-                    {
-                        System.out.println("Player " + i + " left the map.");
-                        piece.setPosition(i*2+2, 0);
-                    }
+                    piece.setPosition(piece.getBackward());
                 }
-                if(input.isKeyJustPressed(Input.Keys.UP))
+                else if(!trace.hitWall())
                 {
-                    TraceResult trace = board.traceLine(piece.getPosition(), piece.getDirection());
-                    if(trace.getPositions().contains(piece.getForward()))
-                    {
-                        piece.setPosition(piece.getForward());
-                    }
-                    else if(!trace.hitWall())
-                    {
-                        System.out.println("Player " + i + " left the map.");
-                        piece.setPosition(i*2+2, 0);
-                    }
+                    System.out.println("Player " + command.id + " left the map.");
+                    piece.setPosition(command.id*2+2, 0);
                 }
-                if(input.isKeyJustPressed(Input.Keys.LEFT)) piece.rotateCCW();
-                if(input.isKeyJustPressed(Input.Keys.RIGHT)) piece.rotateCW();
             }
-            catch(IllegalArgumentException e)
+            if(key == Input.Keys.UP)
             {
-                System.err.println("Tried to move out of bounds");
+                TraceResult trace = board.traceLine(piece.getPosition(), piece.getDirection());
+                if(trace.getPositions().contains(piece.getForward()))
+                {
+                    piece.setPosition(piece.getForward());
+                }
+                else if(!trace.hitWall())
+                {
+                    System.out.println("Player " + command.id + " left the map.");
+                    piece.setPosition(command.id*2+2, 0);
+                }
             }
+            if(key == Input.Keys.LEFT) piece.rotateCCW();
+            if(key == Input.Keys.RIGHT) piece.rotateCW();
+        }
+        catch(IllegalArgumentException e)
+        {
+            System.err.println("Tried to move out of bounds");
         }
 
-        if(input.isKeyJustPressed(Input.Keys.SPACE))
-        {
-            for(int i = 0; i < players.size(); i++)
-            {
-                Piece piece = players.get(i).piece;
+
+        if(key == Input.Keys.SPACE) {
+            for (int i = 0; i < players.size(); i++) {
+                piece = players.get(i).piece;
                 int damage = board.getLasers(piece.getPosition());
-                if (damage > 0)
-                {
-                    System.out.println("Player " + (i+1) + " got hit for " + damage + " damage.");
+                if (damage > 0) {
+                    System.out.println("Player " + (i + 1) + " got hit for " + damage + " damage.");
                 }
 
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.HOLE))
-                {
-                    System.out.println("Player " + (i+1) + " fell in a hole.");
-                    piece.setPosition(i*2+2, 0);
+                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.HOLE)) {
+                    System.out.println("Player " + (i + 1) + " fell in a hole.");
+                    piece.setPosition(i * 2 + 2, 0);
                 }
             }
+        }
+    }
+
+    public String getState()
+    {
+        StringBuilder state = new StringBuilder("State=");
+
+        for (int i = 0; i < players.size(); i++)
+        {
+            Player player = players.get(i);
+            state.append(i);
+            state.append("/");
+            state.append(player.piece.getPosition());
+            state.append("/");
+            state.append(Direction.toInt(player.piece.getDirection()));
+            state.append(";");
+        }
+        state.append("\n");
+
+        return state.toString();
+    }
+
+    public void setState(String state)
+    {
+        state = state.split("=")[1];
+        for (String playerState : state.split(";"))
+        {
+            int id = Integer.parseInt(playerState.split("/")[0]);
+            Player player = players.get(id);
+
+            int direction = Integer.parseInt(playerState.split("/")[2]);
+            player.piece.setDirection(Direction.fromInt(direction));
+
+            String posString = playerState.split("/")[1].replace("(", "").replace(")", "");
+            float x = Float.parseFloat(posString.split(",")[0]);
+            float y = Float.parseFloat(posString.split(",")[1]);
+            player.piece.setPosition(new Vector2(x, y));
         }
     }
 
     // inf112.skeleton.app.Game step by step
     
     // New game
-    // Chooce a name:
+    // Choose a name:
     // New Round
     // New Phase
     // deal 9 cards

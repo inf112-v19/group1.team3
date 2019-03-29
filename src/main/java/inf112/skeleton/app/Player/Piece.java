@@ -40,6 +40,8 @@ public class Piece extends Actor {
         direction = Direction.rotateCCW(direction);
     }
 
+    public void setDirection(Direction direction){ this.direction = direction; }
+
     public Vector2 getForward()
     {
         return new Vector2(position).add(Direction.toVector2(direction));
