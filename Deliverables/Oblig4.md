@@ -8,3 +8,5 @@ Dene timen hadde vi godt samarbeid.
 Amanda er ikke her idag. 
 
 Referat 20.03  Vi jobbet mye med kodingen dette møtet. Vi snakket over hvordan game classen skulle fungere og hva vi ville implementere i den. Vi oppdaterte og player classen med et par funksjoner. Vi så også over et gammel roborally spill som lignet på det vi hadde gjort og så over hvordan de hadde gjort spillet og hvordan de hadde løst ulike funksjoner. Alle var til stede på møte. 
+
+Referat 27.03 Vi valgte Harald som test ansvarlig og William skal være kundeansvarlig. Amanda har jobbet med testklasser og prøvde å lage ulike tester. Erik har sett på multiplayer og hvordan vi skal kunne spille spillet på ulike maskiner. William, Erik, Harald og Amanda var til stede på møte
