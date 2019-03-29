@@ -10,3 +10,5 @@ Amanda er ikke her idag.
 Referat 20.03  Vi jobbet mye med kodingen dette møtet. Vi snakket over hvordan game classen skulle fungere og hva vi ville implementere i den. Vi oppdaterte og player classen med et par funksjoner. Vi så også over et gammel roborally spill som lignet på det vi hadde gjort og så over hvordan de hadde gjort spillet og hvordan de hadde løst ulike funksjoner. Alle var til stede på møte. 
 
 Referat 27.03 Vi valgte Harald som test ansvarlig og William skal være kundeansvarlig. Amanda har jobbet med testklasser og prøvde å lage ulike tester. Erik har sett på multiplayer og hvordan vi skal kunne spille spillet på ulike maskiner. William, Erik, Harald og Amanda var til stede på møte
+
+Referat 29.03 Vi har fått på plass muligheten til å gjøre spillet multiplayer. Oppdatert noen bevegelser på spillebrettet som gjør noen av de tingene som er plassert på brettet aktivt. Vi har og begynt å legge options kortene inn i koden, men ikke implementert dem enda. Håvard, Willliam, og Eirik var til stede
