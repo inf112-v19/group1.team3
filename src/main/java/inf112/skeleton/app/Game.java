@@ -17,16 +17,24 @@ public class Game
     private Board board;
     private ArrayList<Player> players;
 
-    public Game(Board board, int numOfPlayers)
+    public Game(Board board, int numPlayers)
+    {
+        this(board, numPlayers, false);
+    }
+
+    public Game(Board board, int numPlayers, boolean noSprite)
     {
         this.board = board;
-        players = new ArrayList<>(numOfPlayers);
-        for(int i = 0; i < numOfPlayers; i++)
+        players = new ArrayList<>(numPlayers);
+        for(int i = 0; i < numPlayers; i++)
         {
-            players.add(i, new Player("textures/piece1/$dir.png"));
+            if(noSprite) players.add(i, new Player());
+            else players.add(i, new Player("textures/piece1/$dir.png"));
             players.get(i).piece.setPosition(i*2+2, 0);
         }
     }
+
+    public int getNumPlayers() { return players.size(); }
 
     public void draw(SpriteBatch batch)
     {
