@@ -10,8 +10,8 @@ public class Player {
     private Vector2 position = new Vector2(0, 0);
 
     private int hp = 3;
-    Piece piece;
-    ArrayList<Card> program;
+    public Piece piece;
+    public ArrayList<Card> program;
 
     // Default constructor
     public Player()

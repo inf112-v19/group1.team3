@@ -31,6 +31,7 @@ public class Piece extends Actor {
         direction = Direction.rotateCCW(direction);
     }
 
+
     public Vector2 getForward()
     {
         return new Vector2(position).add(Direction.toVector2(direction));
@@ -66,4 +67,5 @@ public class Piece extends Actor {
     public Vector2 getPosition() {
         return position;
     }
+    public Direction getDirection() { return direction; }
 }
