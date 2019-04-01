@@ -12,8 +12,8 @@ public class GameTest {
 
     @Test
     public void handleInputTest (){
-        Board board = new Board();
-        Game game = new Game(board, 1);
+     //   Board board = new Board();
+      //  Game game = new Game(board, 1);
 
 
 
