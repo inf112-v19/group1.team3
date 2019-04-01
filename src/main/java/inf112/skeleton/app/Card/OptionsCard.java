@@ -18,12 +18,12 @@ public class OptionsCard {
     private String FourthGear = "Move 4 spaces instead of 3";
     private String ExtraMemory = "You receive one extra program card each turn";
     private String DoubleBarredLaser = "Laser does 2 damage";
-    private List<String> listOfOptonsCards = new ArrayList<>(Arrays.asList(TractorBeam,SuperiorArchive, Recompile, RearFiringLaser, RammingGear, PressorBeam,
-            MechanicalArm,FourthGear,ExtraMemory,DoubleBarredLaser));
+    private List<String> listOfOptonsCards = new ArrayList<>(Arrays.asList(TractorBeam, SuperiorArchive, Recompile, RearFiringLaser, RammingGear, PressorBeam,
+            MechanicalArm, FourthGear, ExtraMemory, DoubleBarredLaser));
 
     private int numOfOptionsCards = listOfOptonsCards.size();
 
-    public OptionsCard (int y) {
+    public OptionsCard(int y) {
 
         switch (y) {
             case 1:
@@ -61,6 +61,7 @@ public class OptionsCard {
                 break;
         }
     }
+
     public int getNumOfOptionsCards() {
 
         return listOfOptonsCards.size();

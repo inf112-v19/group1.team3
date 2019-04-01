@@ -10,11 +10,10 @@ import inf112.skeleton.app.Direction;
 
 public class Piece extends Actor {
     private Sprite[] sprites = new Sprite[4];
-    private Vector2 position = new Vector2(0,0);
+    private Vector2 position = new Vector2(0, 0);
     private Direction direction = Direction.NORTH;
 
-    public Piece()
-    {
+    public Piece() {
         this.sprites[0] = null;
         this.sprites[1] = null;
         this.sprites[2] = null;
@@ -30,25 +29,23 @@ public class Piece extends Actor {
         this.positionChanged();
     }
 
-    public void rotateCW()
-    {
+    public void rotateCW() {
         direction = Direction.rotateCW(direction);
     }
 
-    public void rotateCCW()
-    {
+    public void rotateCCW() {
         direction = Direction.rotateCCW(direction);
     }
 
-    public void setDirection(Direction direction){ this.direction = direction; }
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 
-    public Vector2 getForward()
-    {
+    public Vector2 getForward() {
         return new Vector2(position).add(Direction.toVector2(direction));
     }
 
-    public Vector2 getBackward()
-    {
+    public Vector2 getBackward() {
         return new Vector2(position).sub(Direction.toVector2(direction));
     }
 
@@ -57,19 +54,17 @@ public class Piece extends Actor {
         sprites[Direction.toInt(direction)].draw(batch);
     }
 
-    public void setPosition(Vector2 new_position)
-    {
+    public void setPosition(Vector2 new_position) {
         setPosition(new_position.x, new_position.y);
     }
 
     @Override
-    protected void positionChanged()
-    {
+    protected void positionChanged() {
         Vector2 new_position = new Vector2(getX(), getY()); // Store it in a new variable in case the move is illegal
-        if(new_position.x > 11 || new_position.x < 0 || new_position.y > 11 || new_position.y < 0) throw new IllegalArgumentException();
-        for(Sprite sprite : sprites)
-        {
-            if (sprite != null) sprite.setPosition(64*new_position.x+16, 64*new_position.y+16);
+        if (new_position.x > 11 || new_position.x < 0 || new_position.y > 11 || new_position.y < 0)
+            throw new IllegalArgumentException();
+        for (Sprite sprite : sprites) {
+            if (sprite != null) sprite.setPosition(64 * new_position.x + 16, 64 * new_position.y + 16);
         }
         this.position = new_position; // Movement complete, update stored position
     }
@@ -77,5 +72,8 @@ public class Piece extends Actor {
     public Vector2 getPosition() {
         return position;
     }
-    public Direction getDirection() { return direction; }
+
+    public Direction getDirection() {
+        return direction;
+    }
 }

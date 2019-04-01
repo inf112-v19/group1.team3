@@ -4,16 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Boards.Board.Board;
-import inf112.skeleton.app.Direction;
 import inf112.skeleton.app.Boards.Board.SquareType;
+import inf112.skeleton.app.Direction;
 
 public class ChopShop extends Board {
-    public ChopShop()
-    {
+    public ChopShop() {
         this(new Sprite(new Texture(Gdx.files.internal("textures/board1.png"))));
     }
-    public ChopShop(Sprite sprite)
-    {
+
+    public ChopShop(Sprite sprite) {
         super(sprite, 12, 12);
 
         addSquareType(11, 0, SquareType.REPAIR);
@@ -28,12 +27,12 @@ public class ChopShop extends Board {
         addSquareType(9, 2, SquareType.HOLE);
         addSquareType(1, 10, SquareType.HOLE);
 
-        addInLine(6,8, Direction.NORTH, 4, SquareType.CONVEYOR_NORTH);
-        addInLine(8,11, Direction.SOUTH, 3, SquareType.CONVEYOR_SOUTH);
-        addInLine(11,10, Direction.WEST, 2, SquareType.CONVEYOR_WEST);
-        addInLine(9,10, Direction.SOUTH, 2, SquareType.CONVEYOR_SOUTH);
+        addInLine(6, 8, Direction.NORTH, 4, SquareType.CONVEYOR_NORTH);
+        addInLine(8, 11, Direction.SOUTH, 3, SquareType.CONVEYOR_SOUTH);
+        addInLine(11, 10, Direction.WEST, 2, SquareType.CONVEYOR_WEST);
+        addInLine(9, 10, Direction.SOUTH, 2, SquareType.CONVEYOR_SOUTH);
         addInLine(11, 6, Direction.WEST, 3, SquareType.CONVEYOR_WEST);
-        addSquareType(7,6, SquareType.CONVEYOR_WEST);
+        addSquareType(7, 6, SquareType.CONVEYOR_WEST);
         addInLine(6, 6, Direction.SOUTH, 3, SquareType.CONVEYOR_SOUTH);
         addInLine(1, 6, Direction.WEST, 2, SquareType.CONVEYOR_WEST);
         addSquareType(0, 5, SquareType.CONVEYOR_EAST);
@@ -89,9 +88,9 @@ public class ChopShop extends Board {
         addSquareType(6, 7, SquareType.ROTATE_CCW);
         addSquareType(2, 5, SquareType.ROTATE_CCW);
 
-        addSquareType(4,3, SquareType.ROTATE_CW);
-        addSquareType(2,6, SquareType.ROTATE_CW);
-        addSquareType(8,6, SquareType.ROTATE_CW);
+        addSquareType(4, 3, SquareType.ROTATE_CW);
+        addSquareType(2, 6, SquareType.ROTATE_CW);
+        addSquareType(8, 6, SquareType.ROTATE_CW);
 
         addLaser(5, 10, Direction.WEST, 1);
         addLaser(2, 4, Direction.NORTH, 1);

@@ -8,30 +8,30 @@ import java.net.Socket;
 import java.util.Vector;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Server extends Thread
-{
+public class Server extends Thread {
     private Game game;
     private int numPlayers;
     private Vector<BufferedWriter> writers;
 
-    Server(int numPlayers)
-    {
+    Server(int numPlayers) {
         this.numPlayers = numPlayers;
         game = new Game(new ChopShop(null), numPlayers, true);
     }
 
-    private void broadcast(String message)
-    {
-        for (BufferedWriter writer : writers)
-        {
-            try { writer.write(message); writer.flush(); }
-            catch (IOException e) { System.err.println("Server failed to broadcast: " + e); throw new RuntimeException(); }
+    private void broadcast(String message) {
+        for (BufferedWriter writer : writers) {
+            try {
+                writer.write(message);
+                writer.flush();
+            } catch (IOException e) {
+                System.err.println("Server failed to broadcast: " + e);
+                throw new RuntimeException();
+            }
         }
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         LinkedBlockingQueue<Command> commandQueue = new LinkedBlockingQueue<>();
         Vector<Socket> clients = new Vector<>(numPlayers);
         writers = new Vector<>(numPlayers);
@@ -40,38 +40,45 @@ public class Server extends Thread
         System.out.println("Waiting for " + numPlayers + " clients.");
 
         ServerSocket socket;
-        try { socket = new ServerSocket(2243); }
-        catch (IOException e) { System.err.println("Failed to bind socket: " + e); throw new RuntimeException(); }
+        try {
+            socket = new ServerSocket(2243);
+        } catch (IOException e) {
+            System.err.println("Failed to bind socket: " + e);
+            throw new RuntimeException();
+        }
 
-        try { while(clients.size() < numPlayers)
-        {
-            Socket client = socket.accept();
-            clients.add(client);
+        try {
+            while (clients.size() < numPlayers) {
+                Socket client = socket.accept();
+                clients.add(client);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            CommandListener listener = new CommandListener(reader, commandQueue, clients.size() - 1);
-            listener.setDaemon(false);
-            listener.start();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                CommandListener listener = new CommandListener(reader, commandQueue, clients.size() - 1);
+                listener.setDaemon(false);
+                listener.start();
 
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-            writers.add(writer);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+                writers.add(writer);
 
-            System.out.println(clients.size() + "/" + numPlayers);
-        } }
-        catch (IOException e) { System.err.println("Failed to accept clients: " + e); throw new RuntimeException(); }
+                System.out.println(clients.size() + "/" + numPlayers);
+            }
+        } catch (IOException e) {
+            System.err.println("Failed to accept clients: " + e);
+            throw new RuntimeException();
+        }
 
         System.out.println("Starting game.");
 
         broadcast("NumPlayers=" + numPlayers + "\n");
 
-        while(true)
-        {
-            try
-            {
+        while (true) {
+            try {
                 Command command = commandQueue.take();
                 game.handleCommand(command);
+            } catch (InterruptedException e) {
+                System.err.println("Failed to receive command from listener thread: " + e);
+                throw new RuntimeException();
             }
-            catch (InterruptedException e) { System.err.println("Failed to receive command from listener thread: " + e); throw new RuntimeException(); }
 
             broadcast(game.getState());
         }

@@ -11,8 +11,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class RoboRally implements ApplicationListener
-{
+public class RoboRally implements ApplicationListener {
     private SpriteBatch batch;
     private Game game;
 
@@ -23,33 +22,30 @@ public class RoboRally implements ApplicationListener
 
     private LinkedBlockingQueue<String> stateQueue;
 
-    public RoboRally()
-    {
+    public RoboRally() {
         this.addr = "localhost";
     }
 
-    public RoboRally(String addr)
-    {
+    public RoboRally(String addr) {
         this.addr = addr;
     }
 
-    private String receiveCommand()
-    {
-        try { return server_reader.readLine(); }
-        catch (IOException e) { System.err.println("Failed to receive command from server: " + e); throw new RuntimeException(); }
+    private String receiveCommand() {
+        try {
+            return server_reader.readLine();
+        } catch (IOException e) {
+            System.err.println("Failed to receive command from server: " + e);
+            throw new RuntimeException();
+        }
     }
 
     @Override
-    public void create()
-    {
-        try
-        {
+    public void create() {
+        try {
             socket = new Socket(addr, 2243);
             server_writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             server_reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.err.println("Failed to connect to server: " + e);
             throw new RuntimeException();
         }
@@ -68,16 +64,11 @@ public class RoboRally implements ApplicationListener
         batch.dispose();
     }
 
-    private void readKey(int key)
-    {
-        if (Gdx.input.isKeyJustPressed(key))
-        {
-            try
-            {
+    private void readKey(int key) {
+        if (Gdx.input.isKeyJustPressed(key)) {
+            try {
                 server_writer.write("KEY=" + key + "\n");
-            }
-            catch(IOException e)
-            {
+            } catch (IOException e) {
                 System.err.println("Failed to send event to server: " + e);
                 throw new RuntimeException();
             }
@@ -95,12 +86,15 @@ public class RoboRally implements ApplicationListener
         readKey(Input.Keys.RIGHT);
         readKey(Input.Keys.SPACE);
 
-        try { server_writer.flush(); }
-        catch (IOException e) { System.err.println("Failed to send events to server: " + e); throw new RuntimeException(); }
+        try {
+            server_writer.flush();
+        } catch (IOException e) {
+            System.err.println("Failed to send events to server: " + e);
+            throw new RuntimeException();
+        }
 
         String state = stateQueue.poll();
-        if (state != null)
-        {
+        if (state != null) {
             game.setState(state);
         }
 

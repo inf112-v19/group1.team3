@@ -1,8 +1,8 @@
 package inf112.skeleton.app.Card;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 public class Card {
 
@@ -17,7 +17,7 @@ public class Card {
     private String moveBack = "Move back";
     private String again = "Again";
     private List<String> listOfCards = new ArrayList<>(Arrays.asList(move1, move2, move3, rightTurn,
-                                            leftTurn, uTurn, moveBack, again));
+            leftTurn, uTurn, moveBack, again));
 
 
     private int numOfCards = listOfCards.size();

@@ -8,8 +8,7 @@ class Laser {
     public int strength;
     public Vector2 position;
 
-    Laser(Direction direction, int strength, Vector2 position)
-    {
+    Laser(Direction direction, int strength, Vector2 position) {
         this.direction = direction;
         this.strength = strength;
         this.position = position;
