@@ -39,7 +39,7 @@ public class Card {
     /*powerUp to be used later
     private String powerUp = "Power up";
     */
-    private int numOfOptionsCards = listOfOptonsCards.size();
+
 
     public Card(int x) {
 
@@ -73,6 +73,7 @@ public class Card {
                 break;
         }
     }
+
 
     //add item in list of cards
     public void addCardToList(String card) {

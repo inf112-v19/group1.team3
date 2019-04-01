@@ -33,5 +33,4 @@ public class CardTest {
         assertEquals(invalidCard.toString(), "Invalid card");
 
     }
-
 }
