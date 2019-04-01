@@ -66,3 +66,4 @@ Vi valgte Harald som test ansvarlig og William skal være kundeansvarlig. Amanda
 Vi har fått på plass muligheten til å gjøre spillet multiplayer. Oppdatert noen bevegelser på spillebrettet som gjør noen av de tingene som er plassert på brettet aktivt. Vi har og begynt å legge options kortene inn i koden, men ikke implementert dem enda. Håvard, Willliam, og Eirik var til stede
 
 ### 01.04
+Vi jobbet litt med koding og tester. Vi fullføre resten av oblig 4, med å svare på spørsmålene i obligen og dokumenterte forskjellige informasjon om prosjektet. Til stede på mæte var William, Amanda, og Erik. 
