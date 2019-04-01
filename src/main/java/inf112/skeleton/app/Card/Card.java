@@ -19,27 +19,12 @@ public class Card {
     private List<String> listOfCards = new ArrayList<>(Arrays.asList(move1, move2, move3, rightTurn,
                                             leftTurn, uTurn, moveBack, again));
 
-    private String OptionscardType;
-    //Options Cards
-    private String TractorBeam = "Pulls a target robot 1 space towards you";
-    private String SuperiorArchive = "When reentering play robot does not receive damage";
-    private String Recompile = "Once each turn, you may discard programming cards";
-    private String RearFiringLaser = "Your robot gets a Rear-Firing-Laser";
-    private String RammingGear = "Whenever your robot pushes or bumps a robot, it receives 1 damage";
-    private String PressorBeam = "Moves target 1 space away from you";
-    private String MechanicalArm = "Your robot can touch a flag or repair site 1 space away";
-    private String FourthGear = "Move 4 spaces instead of 3";
-    private String ExtraMemory = "You receive one extra program card each turn";
-    private String DoubleBarredLaser = "Laser does 2 damage";
-    private  List<String> listOfOptonsCards = new ArrayList<>(Arrays.asList(TractorBeam,SuperiorArchive, Recompile, RearFiringLaser, RammingGear, PressorBeam,
-            MechanicalArm,FourthGear,ExtraMemory,DoubleBarredLaser));
-
 
     private int numOfCards = listOfCards.size();
     /*powerUp to be used later
     private String powerUp = "Power up";
     */
-    private int numOfOptionsCards = listOfOptonsCards.size();
+
 
     public Card(int x) {
 
@@ -73,6 +58,7 @@ public class Card {
                 break;
         }
     }
+
 
     //add item in list of cards
     public void addCardToList(String card) {
