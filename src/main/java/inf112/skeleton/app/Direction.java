@@ -17,6 +17,17 @@ public enum Direction
         }
     }
 
+    public static Direction fromInt(int id)
+    {
+        switch(id)
+        {
+            case 0: return NORTH;
+            case 1: return EAST;
+            case 2: return SOUTH;
+            default: return WEST;
+        }
+    }
+
     public static Direction rotateCW(Direction direction)
     {
         switch(direction)
