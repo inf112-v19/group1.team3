@@ -16,7 +16,7 @@ public class Player {
     // Default constructor
     public Player()
     {
-        this("piece1/$dir.png");
+        piece = new Piece();
     }
 
     public Player(String spritePath)
