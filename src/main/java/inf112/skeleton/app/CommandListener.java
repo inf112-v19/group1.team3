@@ -20,8 +20,8 @@ public class CommandListener extends Thread {
         while (true) {
             try {
                 String line = reader.readLine();
-                String command = line.split("=")[0];
-                String value = line.split("=")[1];
+                String command = line.split("=", 1)[0];
+                String value = line.split("=", 1)[1];
                 commandQueue.put(new Command(id, command, value));
             } catch (IOException e) {
                 System.err.println("Failed to receive command: " + e);

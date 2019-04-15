@@ -3,11 +3,10 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         if (Arrays.asList(args).contains("--server")) {
             int num_clients = Integer.parseInt(args[Arrays.asList(args).indexOf("--server") + 1]);
             Server server = new Server(num_clients);

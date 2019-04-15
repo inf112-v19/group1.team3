@@ -23,173 +23,123 @@ public class Game {
         this.board = board;
         players = new ArrayList<>(numPlayers);
         for (int i = 0; i < numPlayers; i++) {
-            if (noSprite) players.add(i, new Player());
-            else players.add(i, new Player("textures/piece1/$dir.png"));
-            players.get(i).piece.setPosition(i * 2 + 2, 0);
+            if (noSprite) players.add(i, new Player(i, new Vector2(i * 2 + 2, 0)));
+            else players.add(i, new Player("textures/piece1/$dir.png", i, new Vector2(i * 2 + 2, 0)));
         }
     }
 
-    public int getNumPlayers() {
-        return players.size();
-    }
-
-    public void draw(SpriteBatch batch) {
+    void draw(SpriteBatch batch) {
         board.draw(batch, 1);
         for (Player player : players) {
             player.piece.draw(batch, 1);
         }
     }
 
-    public void handleCommand(Command command) {
-        if (!command.command.equals("KEY")) return;
-        int key = Integer.parseInt(command.value);
-        Player player = players.get(command.id);
-        Piece piece = player.piece;
-        try {
-            if (key == Input.Keys.DOWN) {
-                TraceResult trace = board.traceLine(piece.getPosition(), Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
-                if (trace.getPositions().contains(piece.getBackward())) {
-                    piece.setPosition(piece.getBackward());
-                } else if (!trace.hitWall()) {
-                    System.out.println("Player " + command.id + " left the map.");
-                    piece.setPosition(command.id * 2 + 2, 0);
-                }
-            }
-            if (key == Input.Keys.UP) {
-                TraceResult trace = board.traceLine(piece.getPosition(), piece.getDirection());
-                if (trace.getPositions().contains(piece.getForward())) {
-                    piece.setPosition(piece.getForward());
-                } else if (!trace.hitWall()) {
-                    System.out.println("Player " + command.id + " left the map.");
-                    piece.setPosition(command.id * 2 + 2, 0);
-                }
-            }
-            if (key == Input.Keys.LEFT) piece.rotateCCW();
-            if (key == Input.Keys.RIGHT) piece.rotateCW();
-        } catch (IllegalArgumentException e) {
-            System.err.println("Tried to move out of bounds");
+    // Returns true if the player reaches the requested destination
+    private boolean stepPlayer(Player player, Direction direction) {
+        Vector2 destination = new Vector2(player.piece.getPosition()).add(Direction.toVector2(direction));
+        TraceResult trace = board.traceLine(player.piece.getPosition(), direction);
+        if (trace.getPositions().contains(destination)) {
+            player.piece.setPosition(destination);
+            return true; // Reached the goal
+        } else if (!trace.hitWall()) // Did not reach destination, but was not stopped.
+        {
+            player.print("left the map.");
+            player.respawn();
+            return false; // The intended destination is unreachable.
         }
 
+        return false; // Did not move
+    }
 
-        if (key == Input.Keys.SPACE) {
-            for (int i = 0; i < players.size(); i++) {
-                piece = players.get(i).piece;
-                int damage = board.getLasers(piece.getPosition());
-                if (damage > 0) {
-                    System.out.println("Player " + (i + 1) + " got hit for " + damage + " damage.");
-                }
+    void handleCommand(Command command) {
+        if (command.command.equals("KEY")) {
+            int key = Integer.parseInt(command.value);
+            Player player = players.get(command.id);
+            Piece piece = player.piece;
 
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.HOLE)) {
-                    System.out.println("Player " + (i + 1) + " fell in a hole.");
-                    piece.setPosition(i * 2 + 2, 0);
-                }
-                //repair
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.REPAIR)) {
-                    System.out.println("Player " + (i + 1) + " got repaired.");
-                    //TODO: something specified by repair
-                }
-                //double repair
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_REPAIR)) {
-                    System.out.println("Player " + (i + 1) + " got double repaired.");
-                    //TODO: Do something specified by double repair
-                }
-                //rotate clockwise
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.ROTATE_CW)) {
-                    System.out.println("Player " + (i + 1) + " rotated right.");
-                    piece.rotateCW();
-                }
-                //rotate counterclockwise
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.ROTATE_CCW)) {
-                    System.out.println("Player " + (i + 1) + " rotated left.");
+            switch (key) {
+                case Input.Keys.DOWN:
+                    stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
+                    break;
+                case Input.Keys.UP:
+                    stepPlayer(player, piece.getDirection());
+                    break;
+                case Input.Keys.LEFT:
                     piece.rotateCCW();
-                }
-                //move if conveyor south
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_SOUTH)) {
-                    //check if new position is out of bounds
-                    if (piece.getY() - 1 < 0) {
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.SOUTH, i, 1);
-                        continue;
-                    }
-                }
-                //move if conveyor north
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_NORTH)) {
-                    //check if new position is out of bounds
-                    if (piece.getY() + 1 > 11) { //ideally use board height, but can't access from board.getHeight()
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.NORTH, i, 1);
-                        continue;
-                    }
-                }
-                //move if conveyor west
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_WEST)) {
-                    //check if new position is out of bounds
-                    if (piece.getX() - 1 < 0) {
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.WEST, i, 1);
-                        continue;
-                    }
-                }
-                //move if conveyor east
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_EAST)) {
-                    //check if new position is out of bounds
-                    if (piece.getX() > 11) { //ideally use board width, but can't access from board.getWidth()
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.EAST, i, 1);
-                        continue;
-                    }
-                }
-                //move if double conveyor south
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_SOUTH)) {
-                    //check if new position is out of bounds
-                    if (piece.getY() - 2 < 0) {
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.SOUTH, i, 2);
-                        continue;
-                    }
-                }
-                //move if double conveyor north
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_NORTH)) {
-                    //check if new position is out of bounds
-                    if (piece.getY() + 2 > 11) { //ideally use board height, but can't access from board.getHeight()
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.NORTH, i, 2);
-                        continue;
-                    }
-                }
-                //move if double conveyor west
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_WEST)) {
-                    //check if new position is out of bounds
-                    if (piece.getX() - 2 < 0) {
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.WEST, i, 2);
-                        continue;
-                    }
-                }
-                //move if double conveyor east
-                if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_EAST)) {
-                    //check if new position is out of bounds
-                    if (piece.getX() > 11) { //ideally use board width, but can't access from board.getWidth()
-                        leftMap(piece, i);
-                    } else {
-                        conveyorBelt(piece, Direction.EAST, i, 2);
-                        continue;
-                    }
-                }
-
-
+                    break;
+                case Input.Keys.RIGHT:
+                    piece.rotateCW();
+                    break;
+                case Input.Keys.SPACE:
+                    tick(player);
+                    break;
             }
         }
     }
 
-    public String getState() {
+    private void tick(Player player) {
+        int i = players.indexOf(player);
+        Piece piece = player.piece;
+
+        int damage = board.getLasers(piece.getPosition());
+        if (damage > 0) {
+            player.print("got hit for " + damage + " damage.");
+        }
+
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.HOLE)) {
+            player.print("fell in a hole.");
+            player.respawn();
+        }
+        //repair
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.REPAIR)) {
+            player.print("got repaired.");
+            //TODO: something specified by repair
+        }
+        //double repair
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_REPAIR)) {
+            player.print("got double repaired.");
+            //TODO: Do something specified by double repair
+        }
+        //rotate clockwise
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.ROTATE_CW)) {
+            player.print("rotated right.");
+            piece.rotateCW();
+        }
+        //rotate counterclockwise
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.ROTATE_CCW)) {
+            player.print("rotated left.");
+            piece.rotateCCW();
+        }
+        //conveyors
+        Vector2 conveyor = getConveyor(player);
+        if (conveyor != null) conveyorBelt(player, conveyor);
+    }
+
+    private Vector2 getConveyor(Player player) {
+        Piece piece = player.piece;
+        //conveyors
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_SOUTH)) return new Vector2(0, -1);
+        else if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_NORTH))
+            return new Vector2(0, 1);
+        else if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_WEST)) return new Vector2(1, 0);
+        else if (board.getSquareTypes(piece.getPosition()).contains(SquareType.CONVEYOR_EAST))
+            return new Vector2(-1, 0);
+
+        //double conveyors
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_SOUTH))
+            return new Vector2(0, -2);
+        else if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_NORTH))
+            return new Vector2(0, 2);
+        else if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_WEST))
+            return new Vector2(2, 0);
+        else if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_CONVEYOR_EAST))
+            return new Vector2(-2, 0);
+
+        return null;
+    }
+
+    String getState() {
         StringBuilder state = new StringBuilder("State=");
 
         for (int i = 0; i < players.size(); i++) {
@@ -206,7 +156,7 @@ public class Game {
         return state.toString();
     }
 
-    public void setState(String state) {
+    void setState(String state) {
         state = state.split("=")[1];
         for (String playerState : state.split(";")) {
             int id = Integer.parseInt(playerState.split("/")[0]);
@@ -222,109 +172,16 @@ public class Game {
         }
     }
 
-    //move piece to starting position when leaving the map
-    public void leftMap(Piece piece, int i) {
-        System.out.println("Player " + (i + 1) + " left the map.");
-        piece.setPosition(i * 2 + 2, 0);
+    private void conveyorBelt(Player player, Vector2 vel) {
+        int steps = (int) vel.len(); // Need to store this before the vector is normalized.
+        conveyorBelt(player, Direction.fromVector2(vel.nor()), steps);
     }
 
-    //move piece when entering conveyor belt
-    public void conveyorBelt(Piece piece, Direction direction, int i, int steps) {
-        switch (direction) {
-            case NORTH:
-                System.out.println("Player " + (i + 1) + " moved " + steps + " north");
-                piece.setPosition(piece.getX(), piece.getY() + steps);
-                break;
-            case SOUTH:
-                System.out.println("Player " + (i + 1) + " moved " + steps + " south");
-                piece.setPosition(piece.getX(), piece.getY() - steps);
-                break;
-            case WEST:
-                System.out.println("Player " + (i + 1) + " moved " + steps + " west");
-                piece.setPosition(piece.getX() - steps, piece.getY());
-                break;
-            case EAST:
-                System.out.println("Player " + (i + 1) + " moved " + steps + " east");
-                piece.setPosition(piece.getX() + steps, piece.getY());
-                break;
+    private void conveyorBelt(Player player, Direction direction, int steps) {
+        Piece piece = player.piece;
+        if (stepPlayer(player, direction) && steps > 1) {
+            Vector2 conveyor = getConveyor(player);
+            if (conveyor != null) conveyorBelt(player, Direction.fromVector2(conveyor.nor()), steps - 1);
         }
     }
-
-
-    // inf112.skeleton.app.Game step by step
-
-    // New game
-    // Choose a name:
-    // New Round
-    // New Phase
-    // deal 9 cards
-    // choose 5 cards
-    // confirm, 5 cards
-    // for each card, moveRobot()
-    // check for collisions after each moveRobot()
-    // lasers etc will be active after each phase
-
-
-
-    /*  Loop logic
-
-        inf112.skeleton.app.Game {
-
-            Round {
-
-                Phase {
-
-                }
-
-            }
-        }
-
-     */
-
-
-    public void chooseCards() {
-
-
-    }
-
-
-    public void newPhase() {
-
-
-    }
-
-
-    public void inputFromUser() {
-
-
-        //something
-
-
-    }
-
-
-    public void inputFromCPU() {
-
-
-    }
-
-    public void moveRobot() {
-
-        //full movement, partly movement, no movement
-
-
-    }
-
-
-    public void reSpawnPlayer() {
-
-
-    }
-
-    public void newRound() {
-
-
-    }
-
-
 }

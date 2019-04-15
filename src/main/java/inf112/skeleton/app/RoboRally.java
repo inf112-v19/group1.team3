@@ -66,12 +66,16 @@ public class RoboRally implements ApplicationListener {
 
     private void readKey(int key) {
         if (Gdx.input.isKeyJustPressed(key)) {
-            try {
-                server_writer.write("KEY=" + key + "\n");
-            } catch (IOException e) {
-                System.err.println("Failed to send event to server: " + e);
-                throw new RuntimeException();
-            }
+            sendCommand("KEY", String.valueOf(key));
+        }
+    }
+
+    private void sendCommand(String command, String value) {
+        try {
+            server_writer.write(command + "=" + value + "\n");
+        } catch (IOException e) {
+            System.err.println("Failed to send command to server: " + e);
+            throw new RuntimeException();
         }
     }
 
@@ -80,11 +84,15 @@ public class RoboRally implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Read input and send commands below this
+
         readKey(Input.Keys.UP);
         readKey(Input.Keys.DOWN);
         readKey(Input.Keys.LEFT);
         readKey(Input.Keys.RIGHT);
         readKey(Input.Keys.SPACE);
+
+        // Read input and send commands above this
 
         try {
             server_writer.flush();

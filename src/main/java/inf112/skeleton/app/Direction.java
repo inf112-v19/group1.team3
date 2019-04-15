@@ -69,4 +69,13 @@ public enum Direction {
                 return new Vector2(-1, 0);
         }
     }
+
+    public static Direction fromVector2(Vector2 direction) {
+        if (direction.x == 1) return Direction.WEST;
+        if (direction.x == -1) return Direction.EAST;
+        if (direction.y == 1) return Direction.NORTH;
+        if (direction.y == -1) return Direction.SOUTH;
+
+        throw new IllegalArgumentException();
+    }
 }
