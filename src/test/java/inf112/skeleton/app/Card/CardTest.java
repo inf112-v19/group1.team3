@@ -31,7 +31,5 @@ public class CardTest {
         //check that out of index int returns proper feedback
         Card invalidCard = new Card(card1.getNumOfCards()+100);
         assertEquals(invalidCard.toString(), "Invalid card");
-
     }
-
 }

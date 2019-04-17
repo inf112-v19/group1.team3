@@ -1,9 +1,10 @@
 package inf112.skeleton.app.Deck;
 
+import inf112.skeleton.app.Card.Card;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
-import inf112.skeleton.app.Card.Card;
 
 public class Deck {
 
@@ -14,7 +15,7 @@ public class Deck {
 
     public Deck() {
 
-        for (int i=0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             int randomNum = ThreadLocalRandom.current().nextInt(1, numOfCards + 1);
             Card card = new Card(randomNum);
             cards.add(i, card);
@@ -32,20 +33,22 @@ public class Deck {
     public void shuffleDeck() {
         Collections.shuffle(cards);
     }
+
     //select nine cards from deck
     public ArrayList<Card> selectNine() {
         ArrayList<Card> nineCards = new ArrayList<Card>(9);
-        for(int i=0; i<9; i++) {
+        for (int i = 0; i < 9; i++) {
             nineCards.add(i, cards.get(i));
         }
         return nineCards;
     }
+
     //select five random cards from deck
     public ArrayList<Card> selectFiveRandom() {
         //use shuffleDeck for randomization
         shuffleDeck();
         ArrayList<Card> fiveCards = new ArrayList<Card>(5);
-        for(int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             fiveCards.add(i, cards.get(i));
         }
         return fiveCards;

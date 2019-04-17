@@ -14,43 +14,36 @@ public class Player {
     public ArrayList<Card> program;
 
     // Default constructor
-    public Player()
-    {
+    public Player() {
         piece = new Piece();
     }
 
-    public Player(String spritePath)
-    {
+    public Player(String spritePath) {
         piece = new Piece(spritePath);
     }
 
     // Sets hp to max
-    public void repair()
-    {
+    public void repair() {
         hp = 3;
     }
 
     // Does n damage and returns the remaining hp
-    public int hit(int damage)
-    {
+    public int hit(int damage) {
         hp -= damage;
         if (hp < 0) hp = 0;
         return hp;
     }
 
-    public int getHp()
-    {
+    public int getHp() {
         return hp;
     }
 
-    public void setProgram(ArrayList<Card> program)
-    {
+    public void setProgram(ArrayList<Card> program) {
         this.program = program;
     }
 
     // "Consumes" the first card of the program
-    public Card takeCard()
-    {
+    public Card takeCard() {
         return program.remove(0);
     }
 }
