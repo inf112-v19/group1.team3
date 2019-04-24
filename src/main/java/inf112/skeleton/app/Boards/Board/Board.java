@@ -37,7 +37,8 @@ public class Board extends Actor {
         return getLasers((int) pos.x, (int) pos.y);
     }
 
-    public int getLasers(int x, int y) {
+    // given a position on the board, returns the total number of lasers crossing that position
+    int getLasers(int x, int y) {
         int laserPower = 0;
         for (Laser laser : lasers) {
             if (traceLaser(laser).getPositions().contains(new Vector2((float) x, (float) y))) {
@@ -52,6 +53,8 @@ public class Board extends Actor {
         return traceLine(laser.position, laser.direction);
     }
 
+    // shoots a "laser"/beam originating in startPos and going in direction, and returns a list of every position
+    // that laser visited before it was stopped by either a wall, player (to be added), or by exiting the map
     public TraceResult traceLine(Vector2 startPos, Direction direction) {
         Vector<Vector2> positions = new Vector<>();
         switch (direction) {
@@ -132,6 +135,7 @@ public class Board extends Actor {
         return new TraceResult(positions, false);
     }
 
+    // Given a position, checks if it is inside the board
     public boolean isInBounds(Vector2 pos) {
         return isInBounds((int) pos.x, (int) pos.y);
     }
@@ -140,6 +144,7 @@ public class Board extends Actor {
         return !(x < 0 || x > width || y < 0 || y > height);
     }
 
+    // adds a property to a position within the board; environmental hazard, wall or similar
     protected void addSquareType(int x, int y, SquareType type) {
         if (!isInBounds(x, y)) {
             throw new IndexOutOfBoundsException();
@@ -147,6 +152,7 @@ public class Board extends Actor {
         this.squareTypes.get(y * width + x).add(type);
     }
 
+    // Convenience function for adding the same type along a line on the board
     protected void addInLine(int x, int y, Direction direction, int length, SquareType type) {
         length -= 1;
         if (length <= 0) {
@@ -168,6 +174,7 @@ public class Board extends Actor {
         }
     }
 
+    // returns every "object" on the given position on the board; hazard, wall, etc.
     public EnumSet<SquareType> getSquareTypes(Vector2 pos) {
         return getSquareTypes((int) pos.x, (int) pos.y);
     }

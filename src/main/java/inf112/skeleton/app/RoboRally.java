@@ -56,7 +56,7 @@ public class RoboRally implements ApplicationListener {
         new StateListener(server_reader, stateQueue).start();
 
         batch = new SpriteBatch();
-        game = new Game(new ChopShop(), numPlayers); // TODO: Replace with fake board taking state from server
+        game = new Game(new ChopShop(), numPlayers);
     }
 
     @Override

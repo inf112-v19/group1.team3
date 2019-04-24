@@ -26,6 +26,8 @@ public class Player {
         this.respawn();
     }
 
+    // spawn is the "default location" to which the player gets reset on death. should be updated as the player reaches
+    // new checkpoints
     public Player(String spritePath, int id, Vector2 spawn) {
         piece = new Piece(spritePath);
         this.id = id;
@@ -46,12 +48,15 @@ public class Player {
         return hp;
     }
 
+    // Moves the player back to it's last known checkpoint, resets health
     public void respawn() {
         piece.setPosition(spawn);
         piece.setDirection(Direction.NORTH);
+        hp = 3;
         print("was respawned.");
     }
 
+    // For debug use, outputs a string annotated with the player identification number
     public void print(String message) {
         System.out.println("Player " + (this.id + 1) + " " + message);
     }

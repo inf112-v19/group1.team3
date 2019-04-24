@@ -18,6 +18,7 @@ public class Server extends Thread {
         game = new Game(new ChopShop(null), numPlayers, true);
     }
 
+    // sends a message to every client, primarily used to broadcast the game state
     private void broadcast(String message) {
         for (BufferedWriter writer : writers) {
             try {
