@@ -1,15 +1,20 @@
 package inf112.skeleton.app.Player;
 
-import com.badlogic.gdx.math.Vector2;
-import org.junit.Test;
+import inf112.skeleton.app.Boards.Board.Board;
+import inf112.skeleton.app.Main;
+
+
+import static org.junit.Assert.*;
 
 public class PlayerTest {
 
 
-    private Player player = new Player(1, new Vector2(0, 0));
+    Player player = new Player();
 
-    @Test
+    //@Test
     public void getPosition() {
         System.out.println(player.piece.getPosition());
     }
+
 }
+

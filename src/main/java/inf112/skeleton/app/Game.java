@@ -6,10 +6,13 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.skeleton.app.Boards.Board.Board;
 import inf112.skeleton.app.Boards.Board.SquareType;
 import inf112.skeleton.app.Boards.Board.TraceResult;
+import inf112.skeleton.app.Card.Card;
+import inf112.skeleton.app.Deck.Deck;
 import inf112.skeleton.app.Player.Piece;
 import inf112.skeleton.app.Player.Player;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
     private Board board;
@@ -35,6 +38,7 @@ public class Game {
         for (Player player : players) {
             player.piece.draw(batch, 1);
         }
+
     }
 
     // Attempts to move the specified player in the specified direction
@@ -198,4 +202,52 @@ public class Game {
             if (conveyor != null) conveyorBelt(player, Direction.fromVector2(conveyor.nor()), steps - 1);
         }
     }
+
+
+    //for testing
+    public ArrayList<Card> pickFive(Deck deck) {
+
+        //show nine cards
+        ArrayList<Card> nineCards = deck.selectNine();
+        System.out.println("May I present your cards:");
+        for(int i = 0; i < nineCards.size(); i++) {
+            System.out.println(nineCards.get(i));
+        }
+
+        //pick five cards
+        System.out.println();
+        System.out.println("Pick 5 cards");
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Card> fiveCards = new ArrayList<>(5);
+
+        for(int i=0; fiveCards.size()<5;i++) {
+
+            //validate input, TODO: need to implement code to check if card is already chosen
+            while(true) {
+                int card = sc.nextInt();
+                if (card > nineCards.size() || card < 0) {
+                    System.out.println("Pick a valid card");
+                }
+                else {
+                    fiveCards.add(i, nineCards.get(card));
+                    break;
+                }
+            }
+        }
+        sc.close();
+
+        System.out.println("You chose:");
+        for(int i=0; i<fiveCards.size(); i++) {
+            System.out.println(fiveCards.get(i));
+        }
+
+        return fiveCards;
+    }
+
+    public ArrayList<Card> pickFiveCPU(Deck deck) {
+
+        return deck.selectFiveRandom();
+    }
+
+
 }
