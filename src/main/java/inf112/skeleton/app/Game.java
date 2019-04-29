@@ -22,6 +22,7 @@ public class Game {
         this(board, numPlayers, false);
     }
 
+    // set noSprite to true if you aren't going to actually draw the sprites, for tests and server use, as it causes an exception
     public Game(Board board, int numPlayers, boolean noSprite) {
         this.board = board;
         players = new ArrayList<>(numPlayers);
@@ -31,6 +32,7 @@ public class Game {
         }
     }
 
+    // draws the board and all the players to the specified batch
     void draw(SpriteBatch batch) {
         board.draw(batch, 1);
         for (Player player : players) {
@@ -39,10 +41,11 @@ public class Game {
 
     }
 
+    // Attempts to move the specified player in the specified direction
     // Returns true if the player reaches the requested destination
     private boolean stepPlayer(Player player, Direction direction) {
         Vector2 destination = new Vector2(player.piece.getPosition()).add(Direction.toVector2(direction));
-        TraceResult trace = board.traceLine(player.piece.getPosition(), direction);
+        TraceResult trace = board.traceLine(player.piece.getPosition(), direction); // Shoots a "laser" to check for walls
         if (trace.getPositions().contains(destination)) {
             player.piece.setPosition(destination);
             return true; // Reached the goal
@@ -56,6 +59,7 @@ public class Game {
         return false; // Did not move
     }
 
+    // Receives a command (two strings from a player) and performs actions requested by that command
     void handleCommand(Command command) {
         if (command.command.equals("KEY")) {
             int key = Integer.parseInt(command.value);
@@ -82,6 +86,7 @@ public class Game {
         }
     }
 
+    // applies stage hazards and player lasers to the specified player
     private void tick(Player player) {
         int i = players.indexOf(player);
         Piece piece = player.piece;
@@ -120,6 +125,8 @@ public class Game {
         if (conveyor != null) conveyorBelt(player, conveyor);
     }
 
+    // returns a vector representing the type of conveyor belt the player is on, and null if it isn't on any
+    // it's a directional vector, except it has a magnitude of 2 if it's a double conveyor
     private Vector2 getConveyor(Player player) {
         Piece piece = player.piece;
         //conveyors
@@ -143,6 +150,8 @@ public class Game {
         return null;
     }
 
+    // returns the total state of the board as a string, so that it can be communicated back to the clients
+    // exclusively used by the server
     String getState() {
         StringBuilder state = new StringBuilder("State=");
 
@@ -160,6 +169,8 @@ public class Game {
         return state.toString();
     }
 
+    // accepts a string representing the total state of the board, and applies it to all the sprites
+    // exclusively used by the client
     void setState(String state) {
         state = state.split("=")[1];
         for (String playerState : state.split(";")) {
@@ -176,13 +187,16 @@ public class Game {
         }
     }
 
+    // given a player and a directional vector as returned by the getConveyor function, determines the number of step
+    // and transforms the direction into a Direction type, so that it can be used by the recursive function
     private void conveyorBelt(Player player, Vector2 vel) {
         int steps = (int) vel.len(); // Need to store this before the vector is normalized.
         conveyorBelt(player, Direction.fromVector2(vel.nor()), steps);
     }
 
+    // recursively moves a player along a series of belts changing direction as needed until it either runs out of
+    // "steps", aka moves the player as much as it should be, or the player ends up not standing on a conveyor belt
     private void conveyorBelt(Player player, Direction direction, int steps) {
-        Piece piece = player.piece;
         if (stepPlayer(player, direction) && steps > 1) {
             Vector2 conveyor = getConveyor(player);
             if (conveyor != null) conveyorBelt(player, Direction.fromVector2(conveyor.nor()), steps - 1);

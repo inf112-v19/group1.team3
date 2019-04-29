@@ -2,6 +2,7 @@ package inf112.skeleton.app.Player;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.skeleton.app.Card.Card;
+import inf112.skeleton.app.Direction;
 
 import java.util.ArrayList;
 
@@ -13,13 +14,26 @@ public class Player {
     public Piece piece;
     public ArrayList<Card> program;
 
+    private int id;
+    private Vector2 spawn;
+
     // Default constructor
-    public Player() {
+    public Player(int id, Vector2 spawn) {
         piece = new Piece();
+        this.id = id;
+        this.spawn = spawn;
+
+        this.respawn();
     }
 
-    public Player(String spritePath) {
+    // spawn is the "default location" to which the player gets reset on death. should be updated as the player reaches
+    // new checkpoints
+    public Player(String spritePath, int id, Vector2 spawn) {
         piece = new Piece(spritePath);
+        this.id = id;
+        this.spawn = spawn;
+
+        this.respawn();
     }
 
     // Sets hp to max
@@ -32,6 +46,19 @@ public class Player {
         hp -= damage;
         if (hp < 0) hp = 0;
         return hp;
+    }
+
+    // Moves the player back to it's last known checkpoint, resets health
+    public void respawn() {
+        piece.setPosition(spawn);
+        piece.setDirection(Direction.NORTH);
+        hp = 3;
+        print("was respawned.");
+    }
+
+    // For debug use, outputs a string annotated with the player identification number
+    public void print(String message) {
+        System.out.println("Player " + (this.id + 1) + " " + message);
     }
 
     public int getHp() {
