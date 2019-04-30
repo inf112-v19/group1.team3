@@ -77,6 +77,10 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         Deck deck = new Deck();
         cards = deck.selectNine();
         chosen_cards = new ArrayList<>();
+
+        for (int x = 0; x < 5; x++) {
+            card(x);
+        } // Chose 5 cards automatically for debugging
     }
 
     @Override
