@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Boards.ChopShop;
 import inf112.skeleton.app.Card.Card;
@@ -14,7 +12,6 @@ import inf112.skeleton.app.Deck.Deck;
 import inf112.skeleton.app.UI.UI;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -24,6 +21,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
     private Game game;
     private UI ui;
     private ArrayList<Card> cards;
+    private ArrayList<Card> chosen_cards;
 
     private String addr;
     private Socket socket;
@@ -78,7 +76,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         //for testing
         Deck deck = new Deck();
         cards = deck.selectNine();
-
+        chosen_cards = new ArrayList<>();
     }
 
     @Override
@@ -113,6 +111,17 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         readKey(Input.Keys.LEFT);
         readKey(Input.Keys.RIGHT);
         readKey(Input.Keys.SPACE);
+
+        if (chosen_cards.size() == 5) {
+            System.out.println("FIVE CARDS CHOSEN");
+            StringBuilder cards = new StringBuilder();
+            for (Card card : chosen_cards) {
+                cards.append(card);
+                cards.append(",");
+            }
+            sendCommand("CARDS", cards.toString());
+            chosen_cards = new ArrayList<>();
+        }
 
         // Read input and send commands above this
 
@@ -174,44 +183,53 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         return false;
     }
 
+    private void card(int i) {
+        if (chosen_cards.contains(cards.get(i))) {
+            System.out.println("Player tried chose card, but it was already chosen.");
+        } else {
+            System.out.println("Player chose card: " + cards.get(i));
+            chosen_cards.add(cards.get(i));
+        }
+    }
+
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(button == Input.Buttons.LEFT){
             //Card 1
             if(box1(screenX, screenY)) {
-                System.out.println("Card 1");
+                card(0);
             }
             //Card 2
             if(box2(screenX, screenY)) {
-                System.out.println("Card 2");
+                card(1);
             }
             //Card 3
             if(box3(screenX, screenY)) {
-                System.out.println("Card 3");
+                card(2);
             }
             //Card 4
             if(box4(screenX, screenY)) {
-                System.out.println("Card 4");
+                card(3);
             }
             //Card 5
             if(box5(screenX, screenY)) {
-                System.out.println("Card 5");
+                card(4);
             }
             //Card 6
             if(box6(screenX, screenY)) {
-                System.out.println("Card 6");
+                card(5);
             }
             //Card 7
             if(box7(screenX, screenY)) {
-                System.out.println("Card 7");
+                card(6);
             }
             //Card 8
             if(box8(screenX, screenY)) {
-                System.out.println("Card 8");
+                card(7);
             }
             //Card 9
             if(box9(screenX, screenY)) {
-                System.out.println("Card 9");
+                card(8);
             }
         }
         if(button == Input.Buttons.RIGHT){
@@ -242,66 +260,39 @@ public class RoboRally implements ApplicationListener, InputProcessor {
 
     //make UI area for Cards into boxes, to be used for UI input
     public boolean box1(int screenX, int screenY) {
-        if(screenX < 868 && screenX > 768 && screenY > 0 && screenY < 100) {
-            return true;
-        }
-        return false;
+        return screenX < 868 && screenX > 768 && screenY > 0 && screenY < 100;
     }
 
     public boolean box2(int screenX, int screenY) {
-        if(screenX < 968 && screenX > 868 && screenY > 0 && screenY < 100) {
-            return true;
-        }
-        return false;
+        return screenX < 968 && screenX > 868 && screenY > 0 && screenY < 100;
     }
 
     public boolean box3(int screenX, int screenY) {
-        if(screenX < 1068 && screenX > 968 && screenY > 0 && screenY < 100) {
-            return true;
-        }
-        return false;
+        return screenX < 1068 && screenX > 968 && screenY > 0 && screenY < 100;
     }
 
     public boolean box4(int screenX, int screenY) {
-        if(screenX < 868 && screenX > 768 && screenY > 100 && screenY < 200) {
-            return true;
-        }
-        return false;
+        return screenX < 868 && screenX > 768 && screenY > 100 && screenY < 200;
     }
 
     public boolean box5(int screenX, int screenY) {
-        if(screenX < 968 && screenX > 868 && screenY > 100 && screenY < 200) {
-            return true;
-        }
-        return false;
+        return screenX < 968 && screenX > 868 && screenY > 100 && screenY < 200;
     }
 
     public boolean box6(int screenX, int screenY) {
-        if(screenX < 1068 && screenX > 968 && screenY > 100 && screenY < 200) {
-            return true;
-        }
-        return false;
+        return screenX < 1068 && screenX > 968 && screenY > 100 && screenY < 200;
     }
 
     public boolean box7(int screenX, int screenY) {
-        if(screenX < 868 && screenX > 768 && screenY > 200 && screenY < 300) {
-            return true;
-        }
-        return false;
+        return screenX < 868 && screenX > 768 && screenY > 200 && screenY < 300;
     }
 
     public boolean box8(int screenX, int screenY) {
-        if(screenX < 968 && screenX > 868 && screenY > 200 && screenY < 300) {
-            return true;
-        }
-        return false;
+        return screenX < 968 && screenX > 868 && screenY > 200 && screenY < 300;
     }
 
     public boolean box9(int screenX, int screenY) {
-        if(screenX < 1068 && screenX > 968 && screenY > 200 && screenY < 300) {
-            return true;
-        }
-        return false;
+        return screenX < 1068 && screenX > 968 && screenY > 200 && screenY < 300;
     }
 
 }

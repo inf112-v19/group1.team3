@@ -83,6 +83,11 @@ public class Game {
                     tick(player);
                     break;
             }
+        } else if (command.command.equals("CARDS")) {
+            System.out.println("SERVER RECEIVED CARDS");
+            for (String card : command.value.split(",")) {
+                players.get(command.id).print("chose card: " + card);
+            }
         }
     }
 
