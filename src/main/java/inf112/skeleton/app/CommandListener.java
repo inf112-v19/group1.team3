@@ -21,13 +21,21 @@ public class CommandListener extends Thread
     public void run() {
         while (true) {
             try {
-                String line = reader.readLine();
-                String command = line.split("=")[0];
-                String value = line.split("=")[1];
-                commandQueue.put(new Command(id, command, value));
-            } catch (IOException e) {
-                System.err.println("Failed to receive command: " + e);
-                throw new RuntimeException();
+                try {
+                    String line = reader.readLine();
+                    if (line == null || line.isEmpty() || !line.contains("=")) {
+                        System.err.println("Corrupt message; possible player disconnect.");
+                        commandQueue.put(new Command(-1, "END", ""));
+                        return;
+                    }
+                    String command = line.split("=")[0];
+                    String value = line.split("=")[1];
+                    commandQueue.put(new Command(id, command, value));
+                } catch (IOException e) {
+                    System.err.println("Failed to receive command: " + e);
+                    commandQueue.put(new Command(-1, "END", ""));
+                    return;
+                }
             }
             catch (InterruptedException e) {
                 System.err.println("Failed to send command to main thread: " + e);

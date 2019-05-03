@@ -2,6 +2,7 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import inf112.skeleton.app.Boards.ChopShop;
 
 import java.util.Arrays;
 
@@ -14,14 +15,17 @@ public class Main {
 
         if (Arrays.asList(args).contains("--server")) { // server mode, no window, waits for the specified number of clients before starting the game logic.
             int num_clients = Integer.parseInt(args[Arrays.asList(args).indexOf("--server") + 1]);
-            Server server = new Server(num_clients);
+            Game gameServer = new Game(new ChopShop(null), num_clients, true);
+            Server server = new Server(num_clients, gameServer::handleCommand, gameServer::getState);
             server.setDaemon(false);
             server.start();
         } else if (Arrays.asList(args).contains("--client")) { // client mode, connects to specified existing server
             String addr = args[Arrays.asList(args).indexOf("--client") + 1];
             new LwjglApplication(new RoboRally(addr), cfg);
         } else { // Combined/single player mode, starts a server expecting 1 player and connects to it locally.
-            Server server = new Server(1);
+            int num_clients = 1;
+            Game gameServer = new Game(new ChopShop(null), num_clients, true);
+            Server server = new Server(num_clients, gameServer::handleCommand, gameServer::getState);
             server.start();
 
             new LwjglApplication(new RoboRally(), cfg);

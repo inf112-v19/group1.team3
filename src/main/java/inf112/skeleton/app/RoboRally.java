@@ -24,11 +24,8 @@ public class RoboRally implements ApplicationListener, InputProcessor {
     private ArrayList<Card> chosen_cards;
 
     private String addr;
-    private Socket socket;
     private BufferedWriter server_writer;
     private BufferedReader server_reader;
-
-    ArrayList<Card> fiveCards;
 
     private LinkedBlockingQueue<String> stateQueue;
 
@@ -52,7 +49,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
     @Override
     public void create() {
         try {
-            socket = new Socket(addr, 2243);
+            Socket socket = new Socket(addr, 2243);
             server_writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             server_reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
@@ -66,7 +63,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         new StateListener(server_reader, stateQueue).start();
 
         batch = new SpriteBatch();
-        game = new Game(new ChopShop(), numPlayers); // TODO: Replace with fake board taking state from server
+        game = new Game(new ChopShop(), numPlayers);
 
         //Necessary for handling input
         Gdx.input.setInputProcessor(this);
@@ -141,6 +138,11 @@ public class RoboRally implements ApplicationListener, InputProcessor {
 
         String state = stateQueue.poll();
         if (state != null) {
+            if (state.equals("State=Over")) {
+                System.out.println("Game ended!");
+                Gdx.app.exit();
+                return;
+            }
             game.setState(state);
         }
 

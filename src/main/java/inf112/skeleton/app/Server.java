@@ -1,34 +1,48 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.Boards.ChopShop;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class Server extends Thread {
     private Game game;
-    private int numPlayers;
+    protected int numPlayers;
     private Vector<BufferedWriter> writers;
+    private Consumer<Command> commandFunction;
+    private Supplier<String> broadcastFunction;
 
-    Server(int numPlayers) {
+    public Server(int numPlayers, Consumer<Command> commandFunction, Supplier<String> broadcastFunction) {
         this.numPlayers = numPlayers;
-        game = new Game(new ChopShop(null), numPlayers, true);
+        this.commandFunction = commandFunction;
+        this.broadcastFunction = broadcastFunction;
     }
 
     // sends a message to every client, primarily used to broadcast the game state
-    private void broadcast(String message) {
+    boolean broadcast(String message) {
+        boolean success = true;
+        int failures = 0;
+
         for (BufferedWriter writer : writers) {
             try {
                 writer.write(message);
                 writer.flush();
             } catch (IOException e) {
                 System.err.println("Server failed to broadcast: " + e);
-                throw new RuntimeException();
+                success = false;
+                failures += 1;
             }
         }
+
+        if (failures == writers.size()) {
+            System.err.println("Total loss of clients, closing server.");
+            System.exit(1);
+        }
+
+        return success;
     }
 
     @Override
@@ -36,9 +50,6 @@ public class Server extends Thread {
         LinkedBlockingQueue<Command> commandQueue = new LinkedBlockingQueue<>();
         Vector<Socket> clients = new Vector<>(numPlayers);
         writers = new Vector<>(numPlayers);
-
-        System.out.println("SERVER");
-        System.out.println("Waiting for " + numPlayers + " clients.");
 
         ServerSocket socket;
         try {
@@ -60,28 +71,24 @@ public class Server extends Thread {
 
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
                 writers.add(writer);
-
-                System.out.println(clients.size() + "/" + numPlayers);
             }
         } catch (IOException e) {
             System.err.println("Failed to accept clients: " + e);
             throw new RuntimeException();
         }
 
-        System.out.println("Starting game.");
-
         broadcast("NumPlayers=" + numPlayers + "\n");
 
         while (true) {
             try {
                 Command command = commandQueue.take();
-                game.handleCommand(command);
+                commandFunction.accept(command);
             } catch (InterruptedException e) {
                 System.err.println("Failed to receive command from listener thread: " + e);
                 throw new RuntimeException();
             }
 
-            broadcast(game.getState());
+            broadcast(broadcastFunction.get());
         }
     }
 }

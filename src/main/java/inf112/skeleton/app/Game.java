@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class Game {
     private Board board;
     private ArrayList<Player> players;
+    private boolean game_over;
 
     public Game(Board board, int numPlayers) {
         this(board, numPlayers, false);
@@ -43,7 +44,6 @@ public class Game {
         for (Player player : players) {
             player.piece.draw(batch, 1);
         }
-
     }
 
     // Attempts to move the specified player in the specified direction
@@ -103,6 +103,8 @@ public class Game {
                 players.get(command.id).print("chose card: " + card);
                 //players.get(command.id).program.add(card);
             }
+        } else if (command.command.equals("END")) {
+            game_over = true;
         }
     }
 
@@ -173,6 +175,7 @@ public class Game {
     // returns the total state of the board as a string, so that it can be communicated back to the clients
     // exclusively used by the server
     String getState() {
+        if (game_over) return "State=Over\n";
         StringBuilder state = new StringBuilder("State=");
 
         for (int i = 0; i < players.size(); i++) {
