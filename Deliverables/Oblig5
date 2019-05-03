@@ -89,4 +89,8 @@ Kjøring av kode:
 -Kjør med "--client addr" der addr er adressen til serveren for å koble en klient til en ventene server.
 -Spillet er ment å spilles med terminalen for tekst-output
 
+Kjøring av tester:
+Man kjører testene hver for seg. Vi har fem tester som man kan kjøre BoardTest, Cardtest, Playertest, Decktest, og Networktest. Network test tester 
+forskjellige klasser som interakter med hverandre. De andre testene tester en klasse. 
+
 
