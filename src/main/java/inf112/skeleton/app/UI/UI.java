@@ -37,35 +37,35 @@ public class UI extends ApplicationAdapter {
             for(int j = 0; j < 3; j++) {
                 if(nineCards.get(x).toString().equals("Move 1")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move1.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 else if(nineCards.get(x).toString().equals("Move 2")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move2.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 else if(nineCards.get(x).toString().equals("Move 3")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move3.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 else if(nineCards.get(x).toString().equals("Again")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/again.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 else if(nineCards.get(x).toString().equals("Left turn")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/leftTurn.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 else if(nineCards.get(x).toString().equals("Right turn")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/rightTurn.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 else if(nineCards.get(x).toString().equals("U turn")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/uTurn.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 else if(nineCards.get(x).toString().equals("Move back")) {
                     sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/moveBack.png")));
-                    batch.draw(sprite, 768 + i * 100, 668 - j * 100, 100, 100);
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
                 }
                 x++;
             }
@@ -73,44 +73,42 @@ public class UI extends ApplicationAdapter {
 
     }
 
-    //TODO: draw in correct order
     public void drawFive(Batch batch, float parentAlpha, ArrayList<Card> fiveCards) {
         int x = 0;
         for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 2; j++) {
-                if (fiveCards.get(x).toString().equals("Move 1")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move1.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                } else if (fiveCards.get(x).toString().equals("Move 2")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move2.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                } else if (fiveCards.get(x).toString().equals("Move 3")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move3.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                } else if (fiveCards.get(x).toString().equals("Again")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/again.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                } else if (fiveCards.get(x).toString().equals("Left turn")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/leftTurn.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                } else if (fiveCards.get(x).toString().equals("Right turn")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/rightTurn.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                } else if (fiveCards.get(x).toString().equals("U turn")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/uTurn.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                } else if (fiveCards.get(x).toString().equals("Move back")) {
-                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/moveBack.png")));
-                    batch.draw(sprite, 768 + i * 100, 268 - j * 100, 100, 100);
-                }
-                x++;
+            for(int j = 0; j < 3; j++) {
                 //stop after 5 cards
                 if(x==5) {
                     break;
                 }
+                if (fiveCards.get(x).toString().equals("Move 1")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move1.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                } else if (fiveCards.get(x).toString().equals("Move 2")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move2.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                } else if (fiveCards.get(x).toString().equals("Move 3")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/move3.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                } else if (fiveCards.get(x).toString().equals("Again")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/again.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                } else if (fiveCards.get(x).toString().equals("Left turn")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/leftTurn.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                } else if (fiveCards.get(x).toString().equals("Right turn")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/rightTurn.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                } else if (fiveCards.get(x).toString().equals("U turn")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/uTurn.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                } else if (fiveCards.get(x).toString().equals("Move back")) {
+                    sprite = new Sprite(new Texture(Gdx.files.internal("textures/Programming cards/moveBack.png")));
+                    batch.draw(sprite, 768 + j * 100, 668 - i * 100, 100, 100);
+                }
+                x++;
             }
         }
 
     }
-
 }

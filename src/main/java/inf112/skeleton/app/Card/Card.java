@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+//ID number + return int
 public class Card {
 
     private String cardType;
+    private int num;
     //Programming cards
     private String move1 = "Move 1";
     private String move2 = "Move 2";
@@ -21,13 +24,9 @@ public class Card {
 
 
     private int numOfCards = listOfCards.size();
-    /*powerUp to be used later
-    private String powerUp = "Power up";
-    */
-
 
     public Card(int x) {
-
+        num = x;
         switch (x) {
             case 1:
                 cardType = move1;
@@ -58,28 +57,28 @@ public class Card {
                 break;
         }
     }
-
-
+    
     //add item in list of cards
     public void addCardToList(String card) {
-
         listOfCards.add(card);
     }
 
     //remove item in list of cards
     public void removeCardFromList(int index) {
-
         listOfCards.remove(index);
     }
 
     public int getNumOfCards() {
-
         return listOfCards.size();
+    }
+
+    public int getNum() {
+        return num;
     }
 
 
     @Override
     public String toString() {
-        return cardType.toString();
+        return cardType;
     }
 }
