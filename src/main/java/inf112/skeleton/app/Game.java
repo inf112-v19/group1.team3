@@ -6,13 +6,10 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.skeleton.app.Boards.Board.Board;
 import inf112.skeleton.app.Boards.Board.SquareType;
 import inf112.skeleton.app.Boards.Board.TraceResult;
-import inf112.skeleton.app.Card.Card;
-import inf112.skeleton.app.Deck.Deck;
 import inf112.skeleton.app.Player.Piece;
 import inf112.skeleton.app.Player.Player;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
     private Board board;
@@ -225,17 +222,23 @@ public class Game {
     // recursively moves a player along a series of belts changing direction as needed until it either runs out of
     // "steps", aka moves the player as much as it should be, or the player ends up not standing on a conveyor belt
     private void conveyorBelt(Player player, Direction direction, int steps) {
-        if (stepPlayer(player, direction) && steps > 1) {
+        if (stepPlayer(player, direction)) {
             Vector2 conveyor = getConveyor(player);
-            if (conveyor != null) conveyorBelt(player, Direction.fromVector2(conveyor.nor()), steps - 1);
+            if (conveyor != null) {
+                Vector2 dir1 = Direction.toVector2(direction);
+                Vector2 dir2 = conveyor.nor();
+
+                int ang = (int) Math.round(Math.atan2(dir1.x - dir2.x, dir1.y - dir2.y) * (180 / Math.PI));
+                if (ang == 45 || 180 + ang == 45) player.piece.rotateCW();
+                else if (ang == -45) player.piece.rotateCCW();
+                System.out.println(ang);
+                if (steps > 1) conveyorBelt(player, Direction.fromVector2(conveyor.nor()), steps - 1);
+            }
         }
     }
 
-
     //test after player.program is implemented into game
     public void move(Player player, String card) {
-
-        int i = players.indexOf(player);
         Piece piece = player.piece;
 
         switch (card) {
@@ -274,52 +277,4 @@ public class Game {
 
         //lastMove();
     }
-
-
-    //for testing
-    public ArrayList<Card> pickFive(Deck deck) {
-
-        //show nine cards
-        ArrayList<Card> nineCards = deck.selectNine();
-        System.out.println("May I present your cards:");
-        for(int i = 0; i < nineCards.size(); i++) {
-            System.out.println(nineCards.get(i));
-        }
-
-        //pick five cards
-        System.out.println();
-        System.out.println("Pick 5 cards");
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Card> fiveCards = new ArrayList<>(5);
-
-        for(int i=0; fiveCards.size()<5;i++) {
-
-            //validate input, TODO: need to implement code to check if card is already chosen
-            while(true) {
-                int card = sc.nextInt();
-                if (card > nineCards.size() || card < 0) {
-                    System.out.println("Pick a valid card");
-                }
-                else {
-                    fiveCards.add(i, nineCards.get(card));
-                    break;
-                }
-            }
-        }
-        sc.close();
-
-        System.out.println("You chose:");
-        for(int i=0; i<fiveCards.size(); i++) {
-            System.out.println(fiveCards.get(i));
-        }
-
-        return fiveCards;
-    }
-
-    public ArrayList<Card> pickFiveCPU(Deck deck) {
-
-        return deck.selectFiveRandom();
-    }
-
-
 }
