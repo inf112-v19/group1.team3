@@ -95,7 +95,11 @@ public class Game {
                     break;
                     //For testing game.move(player, "Again");
                 case Input.Keys.R:
-                    move(player, "Again"); //player.takeCard().toString());
+                    if(player.program.size() < 1) {
+                        break;
+                    }
+                    move(player, player.takeCard());
+                    System.out.println(player.lastCard());
                     break;
 
             }
@@ -103,7 +107,7 @@ public class Game {
             System.out.println("SERVER RECEIVED CARDS");
             for (String card : command.value.split(",")) {
                 players.get(command.id).print("chose card: " + card);
-                //players.get(command.id).program.add(card);
+                players.get(command.id).program.add(card);
             }
         } else if (command.command.equals("END")) {
             game_over = true;
@@ -274,8 +278,8 @@ public class Game {
                 stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
                 break;
             case "Again":
+                //TODO: something clever
                 //card = player.lastCard().toString();
-                // test this after player.program is implemented into game
                 //move(player, card);
                 break;
         }

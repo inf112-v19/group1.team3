@@ -12,16 +12,19 @@ public class Player {
 
     private int hp = 3;
     public Piece piece;
-    public ArrayList<Card> program;
+    public ArrayList<String> program;
 
     private int id;
     private Vector2 spawn;
+    private String lastCard;
 
     // Default constructor
     public Player(int id, Vector2 spawn) {
         piece = new Piece();
         this.id = id;
         this.spawn = spawn;
+        program = new ArrayList<>();
+        lastCard = "";
 
         this.respawn();
     }
@@ -65,12 +68,29 @@ public class Player {
         return hp;
     }
 
-    public void setProgram(ArrayList<Card> program) {
+    public void decreaseHp() {
+        hp--;
+    }
+
+    public void setProgram(ArrayList<String> program) {
         this.program = program;
     }
 
     // "Consumes" the first card of the program
-    public Card takeCard() {
-        return program.remove(0);
+    public String takeCard() {
+
+        String card = program.remove(0);
+
+        lastCard = card;
+
+        return card;
+    }
+
+    public String lastCard() {
+        return lastCard;
+    }
+
+    public void setCard(String card) {
+        program.add(card);
     }
 }
