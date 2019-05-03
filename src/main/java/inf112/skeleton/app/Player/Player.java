@@ -6,9 +6,6 @@ import inf112.skeleton.app.Direction;
 import java.util.ArrayList;
 
 public class Player {
-
-    private Vector2 position = new Vector2(0, 0);
-
     public int hp = 10;
     public int life = -1;
     public Piece piece;
@@ -41,18 +38,6 @@ public class Player {
         this.respawn();
     }
 
-    // Sets hp to max
-    public void repair() {
-        hp = 10;
-    }
-
-    // Does n damage and returns the remaining hp
-    public int hit(int damage) {
-        hp -= damage;
-        if (hp < 0) hp = 0;
-        return hp;
-    }
-
     // Moves the player back to it's last known checkpoint, resets health
     public void respawn() {
         piece.setPosition(spawn);
@@ -64,19 +49,7 @@ public class Player {
 
     // For debug use, outputs a string annotated with the player identification number
     public void print(String message) {
-        //system.out.println("Player " + (this.id + 1) + " " + message);
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void decreaseHp() {
-        hp--;
-    }
-
-    public void setProgram(ArrayList<String> program) {
-        this.program = program;
+        //System.out.println("Player " + (this.id + 1) + " " + message); // Disabled for release
     }
 
     // "Consumes" the first card of the program
@@ -91,9 +64,5 @@ public class Player {
 
     public String lastCard() {
         return lastCard;
-    }
-
-    public void setCard(String card) {
-        program.add(card);
     }
 }
