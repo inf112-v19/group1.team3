@@ -34,3 +34,14 @@ for å gi beskjed om hva som ble gjort og hvordan det går.
 Vi har vært enige hele veien om de fleste valgene som har blitt tatt. Om noen har vært usikere eller uenige har vi snakket, diskutert 
 og blitt enige. Om det skulle være design, problemløsning eller koding. 
 
+Liste over krav vi har implementert:
+
+•	Det skal være lasere på brettet
+•	Det skal være hull på brettet
+•	fungerende samlebånd på brettet som flytter roboten
+•	fungerende gyroer på brettet som flytter roboten
+•	game over etter 3 tapte liv
+•	power down 
+•	samlebånd som går i dobbelt tempo
+
+
