@@ -52,16 +52,19 @@ og blitt enige. Om det skulle være design, problemløsning eller koding.
 
 Liste over krav vi har implementert:
 
-•	Det skal være lasere på brettet
-•	Det skal være hull på brettet
-•	fungerende samlebånd på brettet som flytter roboten
-•	fungerende gyroer på brettet som flytter roboten
-•	game over etter 3 tapte liv
-•	samlebånd som går i dobbelt tempo
-•	Spillmekanismer for å skyte andre spillere innen rekkevidde med laser som peker rett frem
-•	Feilhåndtering ved disconnect
-•	Man må kunne vinne spillet spillet ved å besøke siste flagg (fullføre et spill)
-•	multiplayer over LAN eller Internet (trenger ikke gjøre noe fancy her, men må kunne spille på ulike maskiner mot hverandre)
+- Man må kunne spille en komplett runde
+- Man må kunne vinne spillet spillet ved å besøke siste flagg (fullføre et spill)
+- Det skal være lasere på brettet
+- Det skal være hull på brettet
+- Skademekanismer 
+- Spillmekanismer for å skyte andre spillere innen rekkevidde med laser som peker rett frem
+- fungerende samlebånd på brettet som flytter robotene
+- fungerende gyroer på brettet som flytter robotene
+- game over etter 3 tapte liv
+- multiplayer over LAN eller Internet (trenger ikke gjøre noe fancy her, men må kunne spille på ulike maskiner mot hverandre)
+- Feilhåndtering ved disconnect
+- samlebånd som går i dobbelt tempo
+
 
 Retrospektiv:
 
