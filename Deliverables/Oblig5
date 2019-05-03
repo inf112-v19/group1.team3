@@ -63,6 +63,7 @@ Liste over krav vi har implementert:
 •	Man må kunne vinne spillet spillet ved å besøke siste flagg (fullføre et spill)
 •	multiplayer over LAN eller Internet (trenger ikke gjøre noe fancy her, men må kunne spille på ulike maskiner mot hverandre)
 
+Retrospektiv:
 
 Dersom vi hadde startet helt på nytt med prosjektet ser vi for oss at vi hadde startet med å lage en mye enklere versjon av spillet for så å 
 videreutvikle den. Startet vi veldig avansert og så at noe av arbeidet vi gjorde ikke ble ferdig i tide. Denne tiden kunne vi heller brukt
