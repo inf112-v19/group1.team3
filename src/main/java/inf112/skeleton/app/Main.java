@@ -17,6 +17,7 @@ public class Main {
             int num_clients = Integer.parseInt(args[Arrays.asList(args).indexOf("--server") + 1]);
             Game gameServer = new Game(new ChopShop(null), num_clients, true);
             Server server = new Server(num_clients, gameServer::handleCommand, gameServer::getState);
+            gameServer.supplyBroadcaster(server::broadcast);
             server.setDaemon(false);
             server.start();
         } else if (Arrays.asList(args).contains("--client")) { // client mode, connects to specified existing server
@@ -26,6 +27,7 @@ public class Main {
             int num_clients = 1;
             Game gameServer = new Game(new ChopShop(null), num_clients, true);
             Server server = new Server(num_clients, gameServer::handleCommand, gameServer::getState);
+            gameServer.supplyBroadcaster(server::broadcast);
             server.start();
 
             new LwjglApplication(new RoboRally(), cfg);

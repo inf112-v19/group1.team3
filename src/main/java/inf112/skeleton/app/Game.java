@@ -10,11 +10,13 @@ import inf112.skeleton.app.Player.Piece;
 import inf112.skeleton.app.Player.Player;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Game {
     private Board board;
     private ArrayList<Player> players;
     private boolean game_over;
+    private Consumer<String> broadcast;
 
     public Game(Board board, int numPlayers) {
         this(board, numPlayers, false);
@@ -32,6 +34,10 @@ public class Game {
                 players.add(i, new Player(path, i, new Vector2(i * 2 + 2, 0)));
             }
         }
+    }
+
+    void supplyBroadcaster(Consumer<String> broadcast) {
+        this.broadcast = broadcast;
     }
 
     // draws the board and all the players to the specified batch
@@ -231,7 +237,6 @@ public class Game {
                 int ang = (int) Math.round(Math.atan2(dir1.x - dir2.x, dir1.y - dir2.y) * (180 / Math.PI));
                 if (ang == 45 || 180 + ang == 45) player.piece.rotateCW();
                 else if (ang == -45) player.piece.rotateCCW();
-                System.out.println(ang);
                 if (steps > 1) conveyorBelt(player, Direction.fromVector2(conveyor.nor()), steps - 1);
             }
         }
