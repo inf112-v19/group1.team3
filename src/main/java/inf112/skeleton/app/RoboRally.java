@@ -123,7 +123,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
 
         if (chosen_cards.size() == 5 && doDraw) {
             doDraw = false;
-            System.out.println("FIVE CARDS CHOSEN");
+            //system.out.println("FIVE CARDS CHOSEN");
             StringBuilder cards = new StringBuilder();
             for (Card card : chosen_cards) {
                 cards.append(card);
@@ -145,13 +145,13 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         String state = stateQueue.poll();
         if (state != null) {
             if (state.equals("State=Over")) {
-                System.out.println("Game ended!");
+                //system.out.println("Game ended!");
                 Gdx.app.exit();
                 return;
             } else if (state.startsWith("State=")) game.setState(state);
             else {
                 if (state.startsWith("WIN=")) {
-                    System.out.println("Player " + state.split("=")[1] + " wins!");
+                    //system.out.println("Player " + state.split("=")[1] + " wins!");
                     Gdx.app.exit();
                     return;
                 } else if (state.equals("StepRound") && !doDraw) {
@@ -159,6 +159,8 @@ public class RoboRally implements ApplicationListener, InputProcessor {
                     chosen_cards = new ArrayList<>();
                     deck = new Deck();
                     cards = deck.selectNine();
+                } else if (state.startsWith("Print=")) {
+                    System.out.print(state.split("=")[1].replace(";", "\n"));
                 }
             }
         }
@@ -211,10 +213,10 @@ public class RoboRally implements ApplicationListener, InputProcessor {
 
     private void card(int i) {
         if (chosen_cards.contains(cards.get(i))) {
-            System.out.println("Player tried chose card, but it was already chosen.");
+            //system.out.println("Player tried chose card, but it was already chosen.");
         } else {
             if (doDraw) {
-                System.out.println("Player chose card: " + cards.get(i));
+                //system.out.println("Player chose card: " + cards.get(i));
                 chosen_cards.add(cards.get(i));
             }
         }

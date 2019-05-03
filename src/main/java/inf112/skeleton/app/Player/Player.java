@@ -64,7 +64,7 @@ public class Player {
 
     // For debug use, outputs a string annotated with the player identification number
     public void print(String message) {
-        System.out.println("Player " + (this.id + 1) + " " + message);
+        //system.out.println("Player " + (this.id + 1) + " " + message);
     }
 
     public int getHp() {

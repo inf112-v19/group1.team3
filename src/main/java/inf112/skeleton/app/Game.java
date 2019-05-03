@@ -119,7 +119,7 @@ public class Game {
                     break;
             }
         } else if (command.command.equals("CARDS")) {
-            System.out.println("SERVER RECEIVED CARDS");
+            //system.out.println("SERVER RECEIVED CARDS");
             for (String card : command.value.split(",")) {
                 if(card.equals("Again") && players.get(command.id).program.size() > 0) {
                     card = players.get(command.id).lastCard();
@@ -132,6 +132,16 @@ public class Game {
             game_over = true;
             broadcast.accept("State=Over\n");
         }
+    }
+
+    private String getPlayerStates() {
+        String out = "";
+
+        for (Player player : players) {
+            out += "Player " + (player.id + 1) + " has " + (3 - player.life) + " lives left, " + (10 - player.hp) + " damage points, and has " + (player.hasFlag1 ? "" : "not ") + "visited the first flag.;";
+        }
+
+        return out;
     }
 
     // applies stage hazards and player lasers to the specified player
@@ -147,6 +157,10 @@ public class Game {
         }
         if (damage > 0) {
             player.print("got hit for " + damage + " damage.");
+            player.hp -= damage;
+            if (player.hp <= 0) {
+                player.respawn();
+            }
         }
 
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.HOLE)) {
@@ -201,6 +215,8 @@ public class Game {
         //conveyors
         Vector2 conveyor = getConveyor(player);
         if (conveyor != null) conveyorBelt(player, conveyor);
+
+        broadcast.accept("Print=" + getPlayerStates() + "\n");
     }
 
     // returns a vector representing the type of conveyor belt the player is on, and null if it isn't on any

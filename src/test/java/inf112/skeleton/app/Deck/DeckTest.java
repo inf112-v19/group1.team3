@@ -1,9 +1,10 @@
 package inf112.skeleton.app.Deck;
 
-import org.junit.Test;
 import inf112.skeleton.app.Card.Card;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class DeckTest {
 
@@ -12,7 +13,7 @@ public class DeckTest {
     public void createDeck() {
         Deck deck = new Deck();
         assertEquals(deck.showCards().size(), 20);
-        System.out.println(deck.showCards());
+        //system.out.println(deck.showCards());
 
         //check that all elements in deck are Card objects
         for (int i = 0; i < deck.showCards().size(); i++){
@@ -35,14 +36,14 @@ public class DeckTest {
     public void selectFiveRandom() {
         Deck deck = new Deck();
         assertEquals(deck.selectFiveRandom().size(), 5);
-        System.out.println(deck.selectFiveRandom());
+        //system.out.println(deck.selectFiveRandom());
     }
 
     @Test
     public void selectFive() {
         Deck deck = new Deck();
         assertEquals(deck.selectFive(1,3,4,3,7).size(), 5);
-        System.out.println(deck.selectFive(1,3,4,3,7));
+        //system.out.println(deck.selectFive(1,3,4,3,7));
     }
 
 
@@ -50,7 +51,7 @@ public class DeckTest {
     public void selectNine() {
         Deck deck = new Deck();
         assertEquals(deck.selectNine().size(), 9);
-        System.out.println(deck.selectNine());
+        //system.out.println(deck.selectNine());
 
     }
 
