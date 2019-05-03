@@ -277,13 +277,8 @@ public class Game {
                 stepPlayer(player, piece.getDirection());
                 stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
                 break;
-            case "Again":
-                //TODO: something clever
-                //card = player.lastCard().toString();
-                //move(player, card);
-                break;
         }
 
-        //lastMove();
+        tick(player);
     }
 }
