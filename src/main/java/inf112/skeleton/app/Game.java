@@ -103,7 +103,13 @@ public class Game {
                     break;
                     //For testing game.move()
                 case Input.Keys.ENTER:
-                    move(player, "Move back"); //player.takeCard().toString());
+                    for (Player player_ : players) {
+                        if (player_.program.size() < 1) {
+                            broadcast.accept("StepRound\n");
+                            break;
+                        }
+                        move(player_, player_.takeCard());
+                    }
                     break;
                     //For testing game.move(player, "Again");
                 case Input.Keys.R:

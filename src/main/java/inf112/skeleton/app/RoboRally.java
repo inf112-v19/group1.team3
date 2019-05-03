@@ -22,6 +22,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
     private UI ui;
     private ArrayList<Card> cards;
     private ArrayList<Card> chosen_cards;
+    private boolean doDraw = true;
 
     private String addr;
     private BufferedWriter server_writer;
@@ -75,9 +76,11 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         cards = deck.selectNine();
         chosen_cards = new ArrayList<>();
 
+        /*
         for (int x = 0; x < 5; x++) {
             card(x);
         } // Chose 5 cards automatically for debugging
+        */
     }
 
     @Override
@@ -117,6 +120,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         readKey(Input.Keys.R);
 
         if (chosen_cards.size() == 5) {
+            doDraw = false;
             System.out.println("FIVE CARDS CHOSEN");
             StringBuilder cards = new StringBuilder();
             for (Card card : chosen_cards) {
@@ -148,6 +152,9 @@ public class RoboRally implements ApplicationListener, InputProcessor {
                     System.out.println("Player " + state.split("=")[1] + " wins!");
                     Gdx.app.exit();
                     return;
+                } else if (state.equals("StepRound")) {
+                    doDraw = true;
+                    chosen_cards = new ArrayList<>();
                 }
             }
         }
@@ -155,8 +162,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         batch.begin();
         game.draw(batch);
 
-        //for testing
-        ui.drawNine(batch,1, cards);
+        if (doDraw) ui.drawNine(batch, 1, cards);
 
         batch.end();
 
