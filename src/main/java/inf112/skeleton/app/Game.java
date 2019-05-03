@@ -86,15 +86,22 @@ public class Game {
                     break;
                 case Input.Keys.SPACE:
                     tick(player);
+                    break;
                     //For testing game.move()
                 case Input.Keys.ENTER:
                     move(player, "Move back"); //player.takeCard().toString());
                     break;
+                    //For testing game.move(player, "Again");
+                case Input.Keys.R:
+                    move(player, "Again"); //player.takeCard().toString());
+                    break;
+
             }
         } else if (command.command.equals("CARDS")) {
             System.out.println("SERVER RECEIVED CARDS");
             for (String card : command.value.split(",")) {
                 players.get(command.id).print("chose card: " + card);
+                //players.get(command.id).program.add(card);
             }
         }
     }
@@ -217,6 +224,7 @@ public class Game {
     }
 
 
+    //test after player.program is implemented into game
     public void move(Player player, String card) {
 
         int i = players.indexOf(player);
@@ -250,10 +258,15 @@ public class Game {
                 stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
                 break;
             case "Again":
-
+                //card = player.lastCard().toString();
+                // test this after player.program is implemented into game
+                //move(player, card);
                 break;
         }
+
+        //lastMove();
     }
+
 
     //for testing
     public ArrayList<Card> pickFive(Deck deck) {
