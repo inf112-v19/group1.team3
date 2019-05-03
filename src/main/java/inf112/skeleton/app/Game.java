@@ -117,21 +117,16 @@ public class Game {
                         move(player_, player_.takeCard());
                     }
                     break;
-                    //For testing game.move(player, "Again");
-                case Input.Keys.R:
-                    if(player.program.size() < 1) {
-                        break;
-                    }
-                    move(player, player.takeCard());
-                    System.out.println(player.lastCard());
-                    break;
-
             }
         } else if (command.command.equals("CARDS")) {
             System.out.println("SERVER RECEIVED CARDS");
             for (String card : command.value.split(",")) {
+                if(card.equals("Again") && players.get(command.id).program.size() > 0) {
+                    card = players.get(command.id).lastCard();
+                }
                 players.get(command.id).print("chose card: " + card);
                 players.get(command.id).program.add(card);
+                players.get(command.id).lastCard = card;
             }
         } else if (command.command.equals("END")) {
             game_over = true;
@@ -319,7 +314,8 @@ public class Game {
                 piece.rotateCCW();
                 break;
             case "U turn":
-                stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
+                piece.rotateCCW();
+                piece.rotateCCW();
                 break;
             case "Move back":
                 stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));

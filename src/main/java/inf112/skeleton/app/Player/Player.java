@@ -16,7 +16,7 @@ public class Player {
 
     public int id;
     public Vector2 spawn;
-    private String lastCard;
+    public String lastCard;
 
     public boolean hasFlag1;
 
