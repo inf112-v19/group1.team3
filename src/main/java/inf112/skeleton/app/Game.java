@@ -30,9 +30,8 @@ public class Game {
         for (int i = 0; i < numPlayers; i++) {
             if (noSprite) players.add(i, new Player(i, new Vector2(i * 2 + 2, 0)));
             else {
-                String path;
-                if (i % 2 == 0) path = "textures/piece1/$dir.png";
-                else path = "textures/piece2/$dir.png";
+                int j = (i % 4) + 1;
+                String path = "textures/piece" + j + "/$dir.png";
                 players.add(i, new Player(path, i, new Vector2(i * 2 + 2, 0)));
             }
         }
