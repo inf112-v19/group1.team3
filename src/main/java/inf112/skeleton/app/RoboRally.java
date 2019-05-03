@@ -144,7 +144,11 @@ public class RoboRally implements ApplicationListener, InputProcessor {
                 return;
             } else if (state.startsWith("State=")) game.setState(state);
             else {
-                // ACCEPT CUSTOM COMMANDS HERE
+                if (state.startsWith("WIN=")) {
+                    System.out.println("Player " + state.split("=")[1] + " wins!");
+                    Gdx.app.exit();
+                    return;
+                }
             }
         }
 

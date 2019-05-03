@@ -181,12 +181,15 @@ public class Game {
         }
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.FLAG1)) {
             player.print("Got the first flag");
+            player.hasFlag1 = true;
             player.spawn = new Vector2(5, 5);
 
         }
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.FLAG2)) {
-            player.print("Player wins the game");
-
+            if (player.hasFlag1) {
+                player.print("Player wins the game");
+                broadcast.accept("WIN=" + (player.id + 1) + "\n");
+            }
         }
         //conveyors
         Vector2 conveyor = getConveyor(player);

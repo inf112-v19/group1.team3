@@ -1,7 +1,6 @@
 package inf112.skeleton.app.Player;
 
 import com.badlogic.gdx.math.Vector2;
-import inf112.skeleton.app.Card.Card;
 import inf112.skeleton.app.Direction;
 
 import java.util.ArrayList;
@@ -17,6 +16,8 @@ public class Player {
     public int id;
     public Vector2 spawn;
     private String lastCard;
+
+    public boolean hasFlag1;
 
     // Default constructor
     public Player(int id, Vector2 spawn) {
