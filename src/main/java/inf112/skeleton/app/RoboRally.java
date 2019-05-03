@@ -115,6 +115,8 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         readKey(Input.Keys.LEFT);
         readKey(Input.Keys.RIGHT);
         readKey(Input.Keys.SPACE);
+        // For testing game.move() in game.handleCommand()
+        readKey(Input.Keys.ENTER);
 
         if (chosen_cards.size() == 5) {
             System.out.println("FIVE CARDS CHOSEN");

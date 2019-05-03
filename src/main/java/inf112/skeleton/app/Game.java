@@ -86,6 +86,9 @@ public class Game {
                     break;
                 case Input.Keys.SPACE:
                     tick(player);
+                    //For testing game.move()
+                case Input.Keys.ENTER:
+                    move(player, "Move back"); //player.takeCard().toString());
                     break;
             }
         } else if (command.command.equals("CARDS")) {
@@ -213,6 +216,44 @@ public class Game {
         }
     }
 
+
+    public void move(Player player, String card) {
+
+        int i = players.indexOf(player);
+        Piece piece = player.piece;
+
+        switch (card) {
+            case "Move 1":
+                stepPlayer(player, piece.getDirection());
+                break;
+            case "Move 2":
+                stepPlayer(player, piece.getDirection());
+                stepPlayer(player, piece.getDirection());
+                break;
+            case "Move 3":
+                stepPlayer(player, piece.getDirection());
+                stepPlayer(player, piece.getDirection());
+                stepPlayer(player, piece.getDirection());
+                break;
+            case "Right turn":
+                piece.rotateCW();
+                break;
+            case "Left turn":
+                piece.rotateCCW();
+                break;
+            case "U turn":
+                stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
+                break;
+            case "Move back":
+                stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
+                stepPlayer(player, piece.getDirection());
+                stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
+                break;
+            case "Again":
+
+                break;
+        }
+    }
 
     //for testing
     public ArrayList<Card> pickFive(Deck deck) {
