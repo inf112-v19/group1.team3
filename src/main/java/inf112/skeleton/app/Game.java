@@ -192,7 +192,7 @@ public class Game {
 
         }
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.FLAG2)) {
-            if (player.hasFlag1) {
+            if (player.hasFlag1 && player.life <= 3) {
                 player.print("Player wins the game");
                 broadcast.accept("WIN=" + (player.id + 1) + "\n");
             }

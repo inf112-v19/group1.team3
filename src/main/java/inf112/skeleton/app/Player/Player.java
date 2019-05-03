@@ -10,6 +10,7 @@ public class Player {
     private Vector2 position = new Vector2(0, 0);
 
     public int hp = 10;
+    public int life = 3;
     public Piece piece;
     public ArrayList<String> program;
 
@@ -57,6 +58,7 @@ public class Player {
         piece.setPosition(spawn);
         piece.setDirection(Direction.NORTH);
         hp = 10;
+        life += 1;
         print("was respawned.");
     }
 
