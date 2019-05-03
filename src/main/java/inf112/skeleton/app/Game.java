@@ -101,6 +101,7 @@ public class Game {
             System.out.println("SERVER RECEIVED CARDS");
             for (String card : command.value.split(",")) {
                 players.get(command.id).print("chose card: " + card);
+                //players.get(command.id).program.add(card);
             }
         }
     }
@@ -257,7 +258,7 @@ public class Game {
                 stepPlayer(player, Direction.rotateCW(Direction.rotateCW(piece.getDirection())));
                 break;
             case "Again":
-                card = player.lastCard().toString();
+                //card = player.lastCard().toString();
                 // test this after player.program is implemented into game
                 //move(player, card);
                 break;
