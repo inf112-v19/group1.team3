@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import inf112.skeleton.app.Direction;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Vector;
 import java.util.stream.Collectors;
@@ -53,13 +54,18 @@ public class Board extends Actor {
         return traceLine(laser.position, laser.direction);
     }
 
+    public TraceResult traceLine(Vector2 startPos, Direction direction) {
+        return traceLine(startPos, direction, new ArrayList<Vector2>());
+    }
+
     // shoots a "laser"/beam originating in startPos and going in direction, and returns a list of every position
     // that laser visited before it was stopped by either a wall, player (to be added), or by exiting the map
-    public TraceResult traceLine(Vector2 startPos, Direction direction) {
+    public TraceResult traceLine(Vector2 startPos, Direction direction, ArrayList<Vector2> blockers) {
         Vector<Vector2> positions = new Vector<>();
         switch (direction) {
             case NORTH:
                 for (float y = startPos.y; y < this.height; y++) {
+                    if (blockers.contains(new Vector2(startPos.x, y))) return new TraceResult(positions);
                     EnumSet<SquareType> types = getSquareTypes((int) startPos.x, (int) y);
 
                     if (types.contains(SquareType.WALL_SOUTH) && y != startPos.y) {
@@ -78,6 +84,7 @@ public class Board extends Actor {
                 return new TraceResult(positions, false); // Hit no walls, exited map
             case SOUTH:
                 for (float y = startPos.y; y >= 0; y--) {
+                    if (blockers.contains(new Vector2(startPos.x, y))) return new TraceResult(positions);
                     EnumSet<SquareType> types = getSquareTypes((int) startPos.x, (int) y);
 
                     if (types.contains(SquareType.WALL_NORTH) && y != startPos.y) {
@@ -96,6 +103,7 @@ public class Board extends Actor {
                 return new TraceResult(positions, false); // Hit no walls, exited map
             case WEST:
                 for (float x = startPos.x; x >= 0; x--) {
+                    if (blockers.contains(new Vector2(x, startPos.y))) return new TraceResult(positions);
                     EnumSet<SquareType> types = getSquareTypes((int) x, (int) startPos.y);
 
                     if (types.contains(SquareType.WALL_EAST) && x != startPos.x) {
@@ -114,6 +122,7 @@ public class Board extends Actor {
                 return new TraceResult(positions, false); // Hit no walls, exited map
             case EAST:
                 for (float x = startPos.x; x < this.width; x++) {
+                    if (blockers.contains(new Vector2(x, startPos.y))) return new TraceResult(positions);
                     EnumSet<SquareType> types = getSquareTypes((int) x, (int) startPos.y);
 
                     if (types.contains(SquareType.WALL_WEST) && x != startPos.x) {

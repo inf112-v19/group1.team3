@@ -52,7 +52,7 @@ public class Game {
     // Returns true if the player reaches the requested destination
     private boolean stepPlayer(Player player, Direction direction) {
         Vector2 destination = new Vector2(player.piece.getPosition()).add(Direction.toVector2(direction));
-        TraceResult trace = board.traceLine(player.piece.getPosition(), direction); // Shoots a "laser" to check for walls
+        TraceResult trace = board.traceLine(player.piece.getPosition(), direction, otherPlayerPositions(player)); // Shoots a "laser" to check for walls
         if (trace.getPositions().contains(destination)) {
             player.piece.setPosition(destination);
             return true; // Reached the goal
@@ -64,6 +64,18 @@ public class Game {
         }
 
         return false; // Did not move
+    }
+
+    // returns a list of positions for every player other than the specified one
+    private ArrayList<Vector2> otherPlayerPositions(Player player) {
+        ArrayList<Vector2> positions = new ArrayList<>();
+        for (Player other : players) {
+            if (player == other) continue;
+
+            positions.add(other.piece.getPosition());
+        }
+
+        return positions;
     }
 
     // Receives a command (two strings from a player) and performs actions requested by that command
@@ -111,6 +123,7 @@ public class Game {
             }
         } else if (command.command.equals("END")) {
             game_over = true;
+            broadcast.accept("State=Over\n");
         }
     }
 
