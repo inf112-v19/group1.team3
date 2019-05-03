@@ -28,6 +28,8 @@ public class RoboRally implements ApplicationListener, InputProcessor {
     private BufferedWriter server_writer;
     private BufferedReader server_reader;
 
+    private Deck deck;
+
     private LinkedBlockingQueue<String> stateQueue;
 
     public RoboRally() {
@@ -72,7 +74,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         ui = new UI();
 
         //for testing
-        Deck deck = new Deck();
+        deck = new Deck();
         cards = deck.selectNine();
         chosen_cards = new ArrayList<>();
 
@@ -119,7 +121,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         readKey(Input.Keys.ENTER);
         readKey(Input.Keys.R);
 
-        if (chosen_cards.size() == 5) {
+        if (chosen_cards.size() == 5 && doDraw) {
             doDraw = false;
             System.out.println("FIVE CARDS CHOSEN");
             StringBuilder cards = new StringBuilder();
@@ -128,7 +130,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
                 cards.append(",");
             }
             sendCommand("CARDS", cards.toString());
-            chosen_cards = new ArrayList<>();
+            //chosen_cards = new ArrayList<>();
         }
 
         // Read input and send commands above this
@@ -155,6 +157,8 @@ public class RoboRally implements ApplicationListener, InputProcessor {
                 } else if (state.equals("StepRound")) {
                     doDraw = true;
                     chosen_cards = new ArrayList<>();
+                    deck = new Deck();
+                    cards = deck.selectNine();
                 }
             }
         }
@@ -163,6 +167,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         game.draw(batch);
 
         if (doDraw) ui.drawNine(batch, 1, cards);
+        else ui.drawFive(batch, 1, chosen_cards);
 
         batch.end();
 
@@ -208,8 +213,10 @@ public class RoboRally implements ApplicationListener, InputProcessor {
         if (chosen_cards.contains(cards.get(i))) {
             System.out.println("Player tried chose card, but it was already chosen.");
         } else {
-            System.out.println("Player chose card: " + cards.get(i));
-            chosen_cards.add(cards.get(i));
+            if (doDraw) {
+                System.out.println("Player chose card: " + cards.get(i));
+                chosen_cards.add(cards.get(i));
+            }
         }
     }
 
