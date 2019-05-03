@@ -57,8 +57,12 @@ Liste over krav vi har implementert:
 •	fungerende samlebånd på brettet som flytter roboten
 •	fungerende gyroer på brettet som flytter roboten
 •	game over etter 3 tapte liv
-•	power down 
 •	samlebånd som går i dobbelt tempo
+•	Spillmekanismer for å skyte andre spillere innen rekkevidde med laser som peker rett frem
+•	Feilhåndtering ved disconnect
+•	Man må kunne vinne spillet spillet ved å besøke siste flagg (fullføre et spill)
+•	multiplayer over LAN eller Internet (trenger ikke gjøre noe fancy her, men må kunne spille på ulike maskiner mot hverandre)
+
 
 Dersom vi hadde startet helt på nytt med prosjektet ser vi for oss at vi hadde startet med å lage en mye enklere versjon av spillet for så å 
 videreutvikle den. Startet vi veldig avansert og så at noe av arbeidet vi gjorde ikke ble ferdig i tide. Denne tiden kunne vi heller brukt
