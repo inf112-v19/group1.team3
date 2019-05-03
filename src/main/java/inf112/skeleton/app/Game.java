@@ -103,6 +103,12 @@ public class Game {
                     break;
                     //For testing game.move()
                 case Input.Keys.ENTER:
+                    int size = player.program.size();
+                    for (Player other : players) {
+                        if (other.program.size() != size) {
+                            break;
+                        }
+                    }
                     for (Player player_ : players) {
                         if (player_.program.size() < 1) {
                             broadcast.accept("StepRound\n");
