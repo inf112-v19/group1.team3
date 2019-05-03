@@ -92,8 +92,8 @@ public class ChopShop extends Board {
         addSquareType(2, 6, SquareType.ROTATE_CW);
         addSquareType(8, 6, SquareType.ROTATE_CW);
 
-        addSquareType(5, 5, SquareType.FLAG);
-        addSquareType(10, 11, SquareType.FLAG);
+        addSquareType(5, 5, SquareType.FLAG1);
+        addSquareType(10, 11, SquareType.FLAG2);
 
         addLaser(5, 10, Direction.WEST, 1);
         addLaser(2, 4, Direction.NORTH, 1);
