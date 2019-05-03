@@ -84,12 +84,9 @@ til vi satt igjen med et spill som har alle funksjonalitetene vi ønsket.
 
 
 Kjøring av kode:
--Main 
--Når spillet kjøres skirves det ut beskjeder i Terminalen. Hvilke kort som er valgt, om noe er valgt feil, damage osv. 
-Se i terminalen mens spillet kjøres. 
-
-
-
-
+-Kjør main uten command line options for å starte spillet i single player variation 
+-Kjør med "--server numplayers" der numplayers er et nummer fra 1 til 4 for å starte en server som vil vente til alle spillerene er tilkoblet
+-Kjør med "--client addr" der addr er adressen til serveren for å koble en klient til en ventene server.
+-Spillet er ment å spilles med terminalen for tekst-output
 
 
