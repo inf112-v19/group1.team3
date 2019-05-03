@@ -82,6 +82,12 @@ Om vi skulle jobbet videre med prosjektet ville vi i tillegg til å jobbe med fo
 videre med for å forbedre spillet. Og satt frister for når vi så for oss å være ferdig med de nye funksjonene. Dette hadde vi fortsatt med
 til vi satt igjen med et spill som har alle funksjonalitetene vi ønsket.
 
+Liste over svakheter og feil i produktet:
+
+•	Skadepoeng – Roboten vil miste skadepoeng, men den vil fortsatt kunne velge alle fem kortene uansett hvor mange skadepoeng den mister
+•	3 liv - Kan ikke fjerne spiller vis de taper, Vist alle spillere taper 3 liv kan ikke spillet avsluttes
+•	Brett Størrelse – Brettet vi spiller på er en liten del av et originalt brett
+
 
 Kjøring av kode:
 -Kjør main uten command line options for å starte spillet i single player variation 
