@@ -154,7 +154,7 @@ public class RoboRally implements ApplicationListener, InputProcessor {
                     System.out.println("Player " + state.split("=")[1] + " wins!");
                     Gdx.app.exit();
                     return;
-                } else if (state.equals("StepRound")) {
+                } else if (state.equals("StepRound") && !doDraw) {
                     doDraw = true;
                     chosen_cards = new ArrayList<>();
                     deck = new Deck();
