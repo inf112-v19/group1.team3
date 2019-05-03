@@ -113,6 +113,12 @@ public class Game {
         Piece piece = player.piece;
 
         int damage = board.getLasers(piece.getPosition());
+        for (Player other : players) {
+            if (other == player) continue;
+
+            TraceResult playerLaser = board.traceLine(other.piece.getPosition(), other.piece.getDirection());
+            if (playerLaser.getPositions().contains(player.piece.getPosition())) damage += 1;
+        }
         if (damage > 0) {
             player.print("got hit for " + damage + " damage.");
         }
