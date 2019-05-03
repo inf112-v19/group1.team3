@@ -136,13 +136,26 @@ public class Game {
         }
         //repair
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.REPAIR)) {
-            player.print("got repaired.");
-            //TODO: something specified by repair
-        }
+            player.spawn = player.piece.getPosition();
+            if (player.hp >= 10) {
+                player.print("player already has full health");
+            }
+            else if (player.hp < 10)
+                player.hp += 1;
+            player.print("got repaired");
+            }
+
         //double repair
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.DOUBLE_REPAIR)) {
-            player.print("got double repaired.");
-            //TODO: Do something specified by double repair
+            player.spawn = player.piece.getPosition();
+            if (player.hp >= 10) {
+                player.print("player already has full health");
+            }
+            else if (player.hp < 10) {
+                player.hp += 2;
+                player.print("got double repaired.");
+            }
+
         }
         //rotate clockwise
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.ROTATE_CW)) {
@@ -153,6 +166,15 @@ public class Game {
         if (board.getSquareTypes(piece.getPosition()).contains(SquareType.ROTATE_CCW)) {
             player.print("rotated left.");
             piece.rotateCCW();
+        }
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.FLAG1)) {
+            player.print("Got the first flag");
+            player.spawn = new Vector2(5, 5);
+
+        }
+        if (board.getSquareTypes(piece.getPosition()).contains(SquareType.FLAG2)) {
+            player.print("Player wins the game");
+
         }
         //conveyors
         Vector2 conveyor = getConveyor(player);

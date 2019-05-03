@@ -10,12 +10,12 @@ public class Player {
 
     private Vector2 position = new Vector2(0, 0);
 
-    private int hp = 3;
+    public int hp = 10;
     public Piece piece;
     public ArrayList<String> program;
 
-    private int id;
-    private Vector2 spawn;
+    public int id;
+    public Vector2 spawn;
     private String lastCard;
 
     // Default constructor
@@ -41,7 +41,7 @@ public class Player {
 
     // Sets hp to max
     public void repair() {
-        hp = 3;
+        hp = 10;
     }
 
     // Does n damage and returns the remaining hp
@@ -55,7 +55,7 @@ public class Player {
     public void respawn() {
         piece.setPosition(spawn);
         piece.setDirection(Direction.NORTH);
-        hp = 3;
+        hp = 10;
         print("was respawned.");
     }
 
