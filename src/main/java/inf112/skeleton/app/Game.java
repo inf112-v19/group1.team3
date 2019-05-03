@@ -129,7 +129,6 @@ public class Game {
 
     // applies stage hazards and player lasers to the specified player
     private void tick(Player player) {
-        int i = players.indexOf(player);
         Piece piece = player.piece;
 
         int damage = board.getLasers(piece.getPosition());
@@ -260,7 +259,7 @@ public class Game {
     }
 
     //test after player.program is implemented into game
-    public void move(Player player, String card) {
+    private void move(Player player, String card) {
         Piece piece = player.piece;
 
         switch (card) {
